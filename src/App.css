@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: stretch;
 
-  width: 600px;
+  width: 680px;
   max-width: 100%;
   margin: 30px auto;
 }
@@ -17,7 +17,7 @@ body {
 }
 
 .content {
-  padding: 50px 50px;
+  padding: 8px 8px;
   border-radius: 16px;
   background-color: #343434;
 }
@@ -32,10 +32,16 @@ body {
   flex-direction: row;
   align-items: center;
   
+  min-width: 300px;
   cursor: pointer;
   background-color: #4c4c4c;
   border-radius: 40px;
+  height: 40px;
   margin-bottom: 8px;
+}
+
+.channel:last-child {
+  margin-bottom: 0px;
 }
 
 .channel:hover {
@@ -47,6 +53,10 @@ body {
   background-color: #5c5c5c;
   border-radius: 40px;
   margin-bottom: 8px;
+}
+
+.avatar {
+  padding-left: 4px;
 }
 
 .avatar img {
@@ -61,11 +71,32 @@ body {
   border-radius: 50%;
 }
 
+.ng {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 6px;
+  min-width: 102px;
+}
+
 .name {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  
   text-decoration: none;
-  padding-left: 8px;
   color: #fcfcfc;
   outline: 0;
+  font-size: 14px;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  
+  font-size: 14px;
+  color: #a7a7a7;
 }
 
 .details {
@@ -75,21 +106,24 @@ body {
 
 .stream-title {
   display: flex;
-  /* flex-direction: row; for some reason this doesn't affect anything */
-  align-items: center;
-  
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   font-size: 14px;
+  max-width: 100%;
   color: #a7a7a7;
 }
 
 .view-count {
   display: flex;
-  /* flex-direction: row; for some reason this doesn't affect anything */
+  flex-direction: row;
   align-items: center;
   margin-left: auto;
   margin-right: 8px;
 
-  font-size: 12px;
+  min-width: 36px;
+  max-width: 100%;
+  font-size: 16px;
   color: #d5d5d5;
 }
 
@@ -97,11 +131,11 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 2px;
+  margin-top: 10px;
   margin-right: 8px;
 
   background-color: #9147ff;
-  width: 18px;
+  min-width: 18px;
   height: 18px;
   border-radius: 50%;
 }

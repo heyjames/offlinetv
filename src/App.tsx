@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="header">Offline TV & Friends!</h1>
+      <h1 className="header">Offline TV & Friends</h1>
       <MemberList members={members} />
     </div>
   );
