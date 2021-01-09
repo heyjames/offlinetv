@@ -19,28 +19,24 @@ const MemberLinks: React.SFC<MemberLinksProps> = ({ member }) => {
 
   return (
     <React.Fragment>
-      <div className="stream-link">
-        <span style={{ float: "left"}}>
-          <div id="avatar"></div>
-          
-          <a rel="noreferrer" target="_blank" href={member.links[0].handle}>
-            {member.alias}
-          </a>
+      <div className="avatar">
+        <img src={"/avatars/" + stream.avatar} />
+      </div>
+      
+      <div className="details">
+        <div className="name">
+          {member.alias}
+        </div>
+        
+        <div className="stream-title" title={stream.title}>
+          {stream.title && stream.title.substring(0, 30) + "..."}
+        </div>
 
-          <span
-            className="stream-title"
-            title="building a japanese-style house in hardcore vanilla minecraft"
-          >{stream.title && " - " + stream.title}
-          </span>
-        </span>
-
-        <span
-          className="view-count"
-          style={{ float: "right"}}
-        >{stream.viewCount && stream.viewCount}<div id="platform"></div>
-        </span>
-
-        <div className="clear"></div>
+        <div className="view-count">
+          {stream.viewCount && stream.viewCount}
+        </div>
+        
+        <div className="platform"></div>
       </div>
     </React.Fragment>
   );

@@ -1,27 +1,11 @@
 .App {
-  padding-top: 30px;
-  max-width: 600px;
-  margin: auto;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  align-items: stretch;
 
-.App-link {
-  color: #61dafb;
+  width: 600px;
+  max-width: 100%;
+  margin: 30px auto;
 }
 
 body {
@@ -38,81 +22,119 @@ body {
   background-color: #343434;
 }
 
-.bar {
-  margin-bottom: 6px;
-}
-
 .header {
   text-align: center;
   color: white;
 }
 
-.stream-link {
+.channel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  cursor: pointer;
   background-color: #4c4c4c;
-  padding-top: 8px;
-  padding-bottom: 9px;
-  padding-left: 4px;
   border-radius: 40px;
+  margin-bottom: 8px;
 }
 
-.stream-link a {
+.channel:hover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  cursor: pointer;
+  background-color: #5c5c5c;
+  border-radius: 40px;
+  margin-bottom: 8px;
+}
+
+.avatar img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 50%;
+}
+
+.name {
   text-decoration: none;
-  padding-left: 40px;
+  padding-left: 8px;
   color: #fcfcfc;
   outline: 0;
 }
 
-.link {
-  padding-right: 4px;
+.details {
+  flex: 1 1;
+  display: flex;
 }
 
-.link:last-child {
-  padding-right: 0px;
-}
-
-#avatar {
-  display: inline-block;
-  position: absolute;
-  margin-top: -5px;
-  /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
-  background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
+.stream-title {
+  display: flex;
+  /* flex-direction: row; for some reason this doesn't affect anything */
+  align-items: center;
   
-  /* make a square container */
-  width: 32px;
-  height: 32px;
-
-  /* fill the container, preserving aspect ratio, and cropping to fit */
-  background-size: cover;
-
-  /* center the image vertically and horizontally */
-  background-position: top center;
-
-  /* round the edges to a circle with border radius 1/2 container size */
-  border-radius: 50%;
+  font-size: 14px;
+  color: #a7a7a7;
 }
 
-#platform {
-  display: inline-block;
-  position: absolute;
-  margin-top: -5px;
+.view-count {
+  display: flex;
+  /* flex-direction: row; for some reason this doesn't affect anything */
+  align-items: center;
+  margin-left: auto;
+  margin-right: 8px;
+
+  font-size: 12px;
+  color: #d5d5d5;
+}
+
+.platform {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2px;
+  margin-right: 8px;
+
   background-color: #9147ff;
   width: 18px;
   height: 18px;
   border-radius: 50%;
 }
 
-.stream-title {
-  font-size: 14px;
-  color: #a7a7a7;
-}
 
-.view-count {
-  padding-right: 16px;
-  padding-top: 4px;
-  font-size: 12px;
-  color: #d5d5d5;
-}
 
-.clear {
-  clear: both;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#avatar {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 50%;
 }

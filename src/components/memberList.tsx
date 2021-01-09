@@ -10,10 +10,10 @@ const MemberList: React.SFC<MemberListProps> = ({ members }) => {
     <div className="content">
       {members.map((member, index) => {
         return (
-          <div className="bar" key={index}>
+          <div className="channel" key={index}>
             <MemberLinks member={member} />
           </div>
-        )
+        );
       })}
     </div>
   );
