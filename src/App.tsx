@@ -8,9 +8,9 @@ function App() {
 
   return (
     <div className="App">
+      <span className="moon"></span>
       <span className="cloud"></span>
       <h1 className="no-select">
-
         <span className="header no-select" onClick={handleLogo}>
           Offline TV
         </span>
