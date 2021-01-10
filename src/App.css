@@ -22,7 +22,7 @@ body {
   background-color: #343434;
 }
 
-h1 {
+.App h1 {
   text-align: center;
 }
 
@@ -31,19 +31,21 @@ h1 {
 	background-color: #7bc5e3;
 	border-radius: 16px;
 	padding: 6px;
-  text-shadow: 1px 1px 0px #ff0000;
+  text-shadow: 3px 3px 0px #0094ce;
   border: 3px dotted #ffffff;
+  cursor: default;
 }
 
 .subheader {
-	font-size: 16px;
+	font-size: 18px;
 	padding-left: 4px;
 	color: #ffffff;
 	position: absolute;
 	margin-top: 30px;
 	transform: rotate(-10deg);
-	margin-left: -40px;
-	text-shadow: 2px 2px 0px #7bc5e3;
+	margin-left: -44px;
+	text-shadow: 2px 2px 0px #0094ce;
+  cursor: default;
 }
 
 .channel {
@@ -165,4 +167,72 @@ h1 {
   min-width: 18px;
   height: 18px;
   border-radius: 50%;
+}
+
+.cloud {
+	width: 108px;
+	height: 36px;
+	background: #f7f7f7;
+	box-shadow: 4px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  position: relative;
+  top: 62px;
+  left: -107px;
+  z-index: -1;
+  margin: auto;
+}
+.cloud::after, .cloud::before {
+   content: "";
+   position: relative;
+   display: inline-block;
+   background: inherit;
+   border-radius: inherit;
+}
+.cloud::before {
+	width: 58px;
+	height: 58px;
+	top: -26px;
+  left: 38px;
+}
+.cloud::after {
+	width: 40px;
+	height: 40px;
+	top: -32px;
+	left: -44px;
+}
+
+.cloud2 {
+	width: 86px;
+	height: 28px;
+	background: #f7f7f7;
+	box-shadow: 4px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+  position: relative;
+  top: -90px;
+  right: -106px;
+  z-index: 1;
+  margin: auto;
+}
+.cloud2::after, .cloud2::before {
+   content: "";
+   position: relative;
+   display: inline-block;
+   background: inherit;
+   border-radius: inherit;
+}
+.cloud2::before {
+	width: 42px;
+	height: 42px;
+	top: -17px;
+  right: -8px;
+}
+.cloud2::after {
+	width: 40px;
+	height: 40px;
+	top: -18px;
+	right: 4px;
+}
+
+.no-select {
+  user-select: none;
 }

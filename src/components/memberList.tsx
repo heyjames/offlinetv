@@ -85,9 +85,17 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
           const css = (live === false) ? { opacity: 0.4 } : {};
 
           return (
-            <div className="channel" style={css} key={index} onClick={() => this.handleClick(stream.url)}>
+            <div 
+              className="channel no-select"
+              style={css}
+              key={index}
+              onClick={() => this.handleClick(stream.url)}
+            >
               <div className="avatar">
-                <img src={api.logo || "/avatars/" + stream.avatar} alt={member.alias.charAt(0)} />
+                <img
+                  src={api.logo || "/avatars/" + stream.avatar}
+                  alt={member.alias.charAt(0)}
+                />
               </div>
               
               <div className="details">

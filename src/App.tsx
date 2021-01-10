@@ -1,19 +1,28 @@
-import React from 'react';
 import './App.css';
-// import { getMembers } from './services/memberService';
 import MemberList from './components/memberList';
 
 function App() {
-  // const members = getMembers();
+  const handleLogo = () => {
+    console.log("<3");
+  }
 
   return (
     <div className="App">
-      <h1>
-        <span className="header">Offline TV</span>
-        <span className="subheader">& Friends!</span>
+      <span className="cloud"></span>
+      <h1 className="no-select">
+
+        <span className="header no-select" onClick={handleLogo}>
+          Offline TV
+        </span>
+        <span className="subheader" onClick={handleLogo}>
+          & Friends!
+        </span>
+
       </h1>
+      <span className="cloud2"></span>
 
       <MemberList />
+      
     </div>
   );
 }
