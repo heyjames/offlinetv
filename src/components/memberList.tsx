@@ -77,10 +77,11 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
           
           const { stream } = member;
           const { api } = member;
-          let title = api.title;
+          const { title } = api;
+          // let title = api.title;
           
           // if (title.length > 43) title = stream.title.substring(0, 44);
-          if (window.innerWidth < 540) title = title.substring(0, 24);
+          // if (window.innerWidth < 540) title = title.substring(0, 24);
           const css = (live === false) ? { opacity: 0.4 } : {};
 
           return (
@@ -99,8 +100,10 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                   </div>
                 </div>
                 
-                <div className="stream-title" title={title}>
-                  {live && title}
+                <div className="stream-title-p">
+                  <div className="stream-title" title={title}>
+                    {live && title}
+                  </div>
                 </div>
         
                 <div className="view-count">

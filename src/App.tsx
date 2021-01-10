@@ -8,7 +8,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="header">Offline TV <span className="subheader">& Friends</span></h1>
+      <h1>
+        <span className="header">Offline TV</span>
+        <span className="subheader">& Friends!</span>
+      </h1>
+
       <MemberList />
     </div>
   );

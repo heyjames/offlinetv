@@ -22,13 +22,28 @@ body {
   background-color: #343434;
 }
 
-.header {
+h1 {
   text-align: center;
-  color: white;
+}
+
+.header {
+	color: #ffffff;
+	background-color: #7bc5e3;
+	border-radius: 16px;
+	padding: 6px;
+  text-shadow: 1px 1px 0px #ff0000;
+  border: 3px dotted #ffffff;
 }
 
 .subheader {
-  font-size: 16px;
+	font-size: 16px;
+	padding-left: 4px;
+	color: #ffffff;
+	position: absolute;
+	margin-top: 30px;
+	transform: rotate(-10deg);
+	margin-left: -40px;
+	text-shadow: 2px 2px 0px #7bc5e3;
 }
 
 .channel {
@@ -79,7 +94,7 @@ body {
   flex-direction: column;
   align-self: center;
   padding-left: 6px;
-  min-width: 102px;
+  min-width: 112px;
 }
 
 .name {
@@ -105,13 +120,22 @@ body {
 .details {
   flex: 1 1;
   display: flex;
+  min-width: 0;
+}
+
+.stream-title-p {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  min-width: 0;
 }
 
 .stream-title {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  flex-wrap: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  /* margin-right: 50px; */
   font-size: 14px;
   max-width: 100%;
   color: #a7a7a7;
@@ -122,7 +146,8 @@ body {
   flex-direction: row-reverse;
   align-items: center;
   margin-left: auto;
-  margin-right: 8px;
+  padding-left: 16px;
+  padding-right: 8px;
 
   min-width: 36px;
   max-width: 100%;
