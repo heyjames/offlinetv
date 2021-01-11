@@ -66,7 +66,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     try {
       this._isMounted = true;
 
-      await pause(1);
+      // await pause(1);
 
       // Get all members
       let members = await getMembers();
@@ -101,10 +101,11 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
           const { title } = api;
           
           let channelClass = "channel no-select";
-          if (live === false) channelClass += " offline";
-
-          let nameClass = "name";
-          if (live === true) nameClass += " online";
+          if (live === true) {
+            channelClass += " online";
+          } else {
+            channelClass += " offline";
+          }
 
           return (
             <div 
@@ -122,7 +123,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
               
               <div className="details">
                 <div className="ng">
-                  <div className={nameClass}>
+                  <div className="name">
                     {member.alias}
                   </div>
                   <div className="game">
@@ -143,6 +144,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             </div>
           );
         })}
+
+        <div id="site-info-p"><span id="site-info">?</span></div>
       </React.Fragment>
     );
   }

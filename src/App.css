@@ -17,11 +17,11 @@ body {
   color: #101010;
 }
 
-.content {
+/* .content {
   padding: 8px 8px;
   border-radius: 16px;
   background-color: #343434;
-}
+} */
 
 .App h1 {
   text-align: center;
@@ -59,16 +59,36 @@ body {
   
   min-width: 300px;
   cursor: pointer;
-  background-color: #4c4c4c;
+  background-color: #434343;
   border-radius: 40px;
   height: 44px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .channel:last-child {
   margin-bottom: 0px;
 }
 .channel:hover {
-  background-color: #535353;
+  background-color: #494949;
+}
+
+.online .details .ng .name {
+  font-weight: bold;
+}
+.online {
+  border: 1px solid #5f5f5f;
+}
+
+.offline {
+  background-color: #2c2c2c;
+}
+.offline:hover {
+  background-color: #2c2c2c;
+}
+.offline .avatar, .offline .details {
+  opacity: 0.35;
+}
+.offline:hover .avatar, .offline:hover .details {
+  opacity: 0.8;
 }
 
 .avatar {
@@ -242,18 +262,7 @@ body {
   height: 25px;
   border-radius: 50%;
   box-shadow: 6px 3px 0px 0px #383b4b;
-  z-index: -1;
-}
-
-.offline {
-  opacity: 0.4;
-}
-.offline:hover {
-  opacity: 0.7;
-}
-
-.online {
-  font-weight: bold;
+  /* z-index: -1; */
 }
 
 #loading-p {
@@ -281,6 +290,34 @@ body {
 }
 @-webkit-keyframes spin {
   to { -webkit-transform: rotate(360deg); }
+}
+
+#site-info-p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #7bc5e3;
+  border: 2px solid white;
+  box-shadow: -2px -1px 0px #c6b086;
+  cursor: pointer;
+}
+#site-info-p:active {
+  box-shadow: unset;
+  left: 6px;
+  bottom: 9px;
+}
+#site-info {
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 3px 3px 0px #0094ce;
 }
 
 /* Source: https://stackoverflow.com/a/39669911 */
