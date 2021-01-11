@@ -256,7 +256,7 @@ body {
   font-weight: bold;
 }
 
-.loading-p {
+#loading-p {
   display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -266,7 +266,7 @@ body {
 }
 
 /* Source: https://codepen.io/mandelid/pen/vwKoe */
-#loading {
+#loading-p > span {
   display: inline-block;
   width: 25px;
   height: 25px;

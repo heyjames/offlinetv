@@ -10,3 +10,9 @@ export function pause(seconds: any) {
       setTimeout(() => { resolve() }, seconds * 1000);
   });
 }
+
+export function mySort(theArray: Array<any>, prop1: any, prop2: any) {
+    return theArray.sort(
+      (a: any, b: any) => (a[prop1][prop2] > b[prop1][prop2]) ? -1 : 1
+    );
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { pause } from '../utils';
+import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
 import { getStreamer, getStream } from '../services/twitchService';
 import { Stream } from '../types/Stream';
@@ -19,8 +19,14 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     loading: true,
     members: []
   };
+  
+  _isMounted = false;
 
-  handleClick = (url: string) => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  handleClick(url: string) {
     window.open(url, "_blank");
   }
 
@@ -42,6 +48,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   //         stream.game = streamData.game;
   //         stream.lastStream = streamData.created_at;
   //         stream.title = streamData.channel.status;
+  //         stream.followers = streamData.channel.followers;
 
   //         members[i].stream.live = true;
   //       }
@@ -54,25 +61,30 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   // }
 
   async componentDidMount() {
-    try {
-      console.log("Component starting to mount...");
+    console.log("Component starting to mount...");
 
-      // await pause(1);
+    try {
+      this._isMounted = true;
+
+      await pause(1);
 
       // Get all members
       let members = await getMembers();
       // Get live members
       let liveMembers = members.filter((member) => member.stream.live === true);
       // Sort live members
-      liveMembers.sort((a: any, b: any) => (a.api.viewers > b.api.viewers) ? -1 : 1);
+      mySort(liveMembers, "api", "viewers");
       // Remove non-live members
       members = members.filter((member) => member.stream.live === false);
+      // Sort non-live members by followers
+      mySort(members, "api", "followers");
       // Merge live and non-live members
       members = [ ...liveMembers, ...members ];
 
-      console.log("Component mounted.");
-      // this.setState({ members }); // Use to have infinite loading.
-      this.setState({ members, loading: false });
+      if (this._isMounted) {
+        console.log("Component mounted.");
+        this.setState({ members, loading: false });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -134,14 +146,24 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       </React.Fragment>
     );
   }
+  
+  renderLoading() {
+    return (
+      <span id="loading-p">
+        <span></span>
+      </span>
+    );
+  }
 
   render() { 
     const { loading } = this.state;
 
     return (
       <div className="content">
-        {loading && <span className="loading-p"><span id="loading"></span></span>}
-        {!loading && this.populateList()}
+        {loading
+          ? this.renderLoading()
+          : this.populateList()
+        }
       </div>
     );
   }
