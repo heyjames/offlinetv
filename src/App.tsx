@@ -7,11 +7,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App no-select">
       <span className="moon"></span>
       <span className="cloud"></span>
-      <h1 className="no-select">
-        <span className="header no-select" onClick={handleLogo}>
+      <h1>
+        <span className="header" onClick={handleLogo}>
           Offline TV
         </span>
         <span className="subheader" onClick={handleLogo}>
@@ -23,6 +23,7 @@ function App() {
 
       <MemberList />
       
+      {/* <footer>This is the footer.</footer> */}
     </div>
   );
 }

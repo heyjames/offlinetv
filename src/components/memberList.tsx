@@ -56,10 +56,22 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   async componentDidMount() {
     try {
       console.log("Component starting to mount...");
-      await pause(0.5);
-      const members = await getMembers();
+
+      // await pause(1);
+
+      // Get all members
+      let members = await getMembers();
+      // Get live members
+      let liveMembers = members.filter((member) => member.stream.live === true);
+      // Sort live members
+      liveMembers.sort((a: any, b: any) => (a.api.viewers > b.api.viewers) ? -1 : 1);
+      // Remove non-live members
+      members = members.filter((member) => member.stream.live === false);
+      // Merge live and non-live members
+      members = [ ...liveMembers, ...members ];
 
       console.log("Component mounted.");
+      // this.setState({ members }); // Use to have infinite loading.
       this.setState({ members, loading: false });
     } catch (error) {
       console.error(error);
@@ -72,27 +84,25 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     return (
       <React.Fragment>
         {members.map((member: any, index) => {
-          const { live } = member.stream;
-          // if (live === false) return (<div>Nothing to see here.</div>);
-          
-          const { stream } = member;
-          const { api } = member;
+          const { stream, api } = member;
+          const { live } = stream;
           const { title } = api;
-          // let title = api.title;
           
-          // if (title.length > 43) title = stream.title.substring(0, 44);
-          // if (window.innerWidth < 540) title = title.substring(0, 24);
-          const css = (live === false) ? { opacity: 0.4 } : {};
+          let channelClass = "channel no-select";
+          if (live === false) channelClass += " offline";
+
+          let nameClass = "name";
+          if (live === true) nameClass += " online";
 
           return (
             <div 
-              className="channel no-select"
-              style={css}
+              className={channelClass}
               key={index}
               onClick={() => this.handleClick(stream.url)}
             >
               <div className="avatar">
                 <img
+                  className={stream.label.toLowerCase()}
                   src={api.logo || "/avatars/" + stream.avatar}
                   alt={member.alias.charAt(0)}
                 />
@@ -100,7 +110,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
               
               <div className="details">
                 <div className="ng">
-                  <div className="name">
+                  <div className={nameClass}>
                     {member.alias}
                   </div>
                   <div className="game">
@@ -115,10 +125,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                 </div>
         
                 <div className="view-count">
-                  {live && api.viewers}
+                  {live && (api.viewers && api.viewers.toLocaleString())}
                 </div>
-                
-                <div className="platform"></div>
               </div>
             </div>
           );
@@ -132,7 +140,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
     return (
       <div className="content">
-        {loading && "Loading..."}
+        {loading && <span className="loading-p"><span id="loading"></span></span>}
         {!loading && this.populateList()}
       </div>
     );

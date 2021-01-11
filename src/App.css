@@ -37,7 +37,7 @@ body {
   cursor: default;
 
   /* Wood: #c6b086, Darker skyblue: #1e8ebb, Yellow: #b4b40e */
-  box-shadow: -4px -3px 0px #c6b086, 1px 1px 4px 2px #7198a7;
+  box-shadow: -3px -2px 0px #c6b086, 1px 1px 4px 2px #7198a7;
 }
 
 .subheader {
@@ -61,26 +61,18 @@ body {
   cursor: pointer;
   background-color: #4c4c4c;
   border-radius: 40px;
-  height: 40px;
+  height: 44px;
   margin-bottom: 8px;
 }
 .channel:last-child {
   margin-bottom: 0px;
 }
 .channel:hover {
-  background-color: #5c5c5c;
-}
-
-#avatar {
-  width: 32px;
-  height: 32px;
-  background-size: cover;
-  background-position: top center;
-  border-radius: 50%;
+  background-color: #535353;
 }
 
 .avatar {
-  padding-left: 4px;
+  padding-left: 3px;
 }
 
 .avatar img {
@@ -88,28 +80,41 @@ body {
   flex-direction: row;
   align-items: center;
   
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background-size: cover;
   background-position: top center;
   border-radius: 50%;
+  border: 2px solid #4c4c4c;
+}
+
+.youtube {
+  box-shadow: 0 0 0 2px #ba0000;
+}
+
+.twitch {
+  box-shadow: 0 0 0 2px #9146ff;
+}
+
+.facebook {
+  box-shadow: 0 0 0 2px #1877f2;
 }
 
 .ng {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  padding-left: 6px;
+  align-items: flex-start;
+  padding-left: 8px;
   min-width: 112px;
 }
 
 .name {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   
   text-decoration: none;
-  color: #fcfcfc;
+  color: #ededed;
   outline: 0;
   font-size: 14px;
 }
@@ -141,7 +146,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
 
-  /* margin-right: 50px; */
   font-size: 14px;
   max-width: 100%;
   color: #a7a7a7;
@@ -152,25 +156,13 @@ body {
   flex-direction: row-reverse;
   align-items: center;
   margin-left: auto;
-  padding-left: 16px;
-  padding-right: 8px;
+  padding-left: 14px;
+  padding-right: 20px;
 
   min-width: 36px;
   max-width: 100%;
   font-size: 14px;
   color: #d5d5d5;
-}
-
-.platform {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  margin-right: 8px;
-
-  background-color: #9147ff;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 50%;
 }
 
 .cloud {
@@ -180,7 +172,7 @@ body {
 	box-shadow: 4px 5px rgba(0, 0, 0, 0.2);
   border-radius: 100px;
   position: relative;
-  top: 62px;
+  top: 58px;
   left: -107px;
   z-index: -1;
   margin: auto;
@@ -252,3 +244,72 @@ body {
   box-shadow: 6px 3px 0px 0px #383b4b;
   z-index: -1;
 }
+
+.offline {
+  opacity: 0.4;
+}
+.offline:hover {
+  opacity: 0.7;
+}
+
+.online {
+  font-weight: bold;
+}
+
+.loading-p {
+  display: flex;
+	flex-direction: row;
+	justify-content: center;
+  align-items: center;
+  height: 44px;
+  color: #ffffff;
+}
+
+/* Source: https://codepen.io/mandelid/pen/vwKoe */
+#loading {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 4px solid #7bc5e3;
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s linear infinite;
+  -webkit-animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+
+/* Source: https://stackoverflow.com/a/39669911 */
+/* .fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+} */
+
+/* footer {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  color: #a7a7a7;
+  background-color: #343434;
+  text-align: center;
+  z-index: 0;
+  padding: 6px;
+  border-radius: 8px;
+} */
