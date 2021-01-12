@@ -7,6 +7,7 @@
   width: 680px;
   max-width: 100%;
   margin: 10px auto;
+  user-select: none;
 }
 
 body {
@@ -17,11 +18,11 @@ body {
   color: #101010;
 }
 
-/* .content {
-  padding: 8px 8px;
-  border-radius: 16px;
-  background-color: #343434;
-} */
+.content {
+  padding: 4px;
+  /* border-radius: 16px;
+  background-color: #343434; */
+}
 
 .App h1 {
   text-align: center;
@@ -249,10 +250,6 @@ body {
 	right: 4px;
 }
 
-.no-select {
-  user-select: none;
-}
-
 /* Source: https://gist.github.com/AnsariAbdullah/26981b22c15941b81996ab933612623b */
 .moon {
   position: absolute;
@@ -296,29 +293,57 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
-  width: 25px;
-  height: 25px;
+  position: relative;
+  left: 14px;
+  bottom: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background-color: #7bc5e3;
-  border: 2px solid white;
+  border: 1px solid white;
   box-shadow: -2px -1px 0px #c6b086;
   cursor: pointer;
+  user-select: none;
 }
 #site-info-p:active {
   box-shadow: unset;
-  left: 6px;
-  bottom: 9px;
+  left: 12px;
+  bottom: 15px;
 }
 #site-info {
   font-weight: bold;
+  font-size: 12px;
   color: #ffffff;
-  text-shadow: 3px 3px 0px #0094ce;
+  text-shadow: 2px 2px 0px #0094ce;
 }
+
+#spacer {
+  /* background-color: rgba(0, 255, 0, 0.1); */
+  height: 200px;
+}
+@media (min-height: 1200px) and (min-width: 310px) { 
+  #spacer {
+    /* background-color: rgb(114, 0, 59); */
+    height: 400px;
+  }
+}
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+  #spacer {
+    /* background-color: rgba(0, 0, 255, 0.1); */
+    height: 200px;
+  }
+}
+/* @media (min-width: 850px) {
+  #spacer {
+    background-color: rgba(255, 0, 0, 0.1);
+    height: 190px;
+  }
+} */
 
 /* Source: https://stackoverflow.com/a/39669911 */
 /* .fade-in {

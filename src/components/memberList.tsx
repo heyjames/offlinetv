@@ -144,8 +144,6 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             </div>
           );
         })}
-
-        <div id="site-info-p"><span id="site-info">?</span></div>
       </React.Fragment>
     );
   }
