@@ -1,13 +1,12 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  /* align-items: stretch; */
   font-family: sans-serif, Arial, Helvetica;
 
-  width: 680px;
-  max-width: 100%;
-  margin: 10px auto;
   user-select: none;
+  /* margin: 10px; */
+  padding: 0 4px;
 }
 
 body {
@@ -18,14 +17,18 @@ body {
   color: #101010;
 }
 
-.content {
-  padding: 4px;
-  /* border-radius: 16px;
-  background-color: #343434; */
+.masthead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.App h1 {
-  text-align: center;
+.content {
+  width: 680px;
+  max-width: 100%;
+  /* margin: 0 auto; */
+  /* border-radius: 16px;
+  background-color: #343434; */
 }
 
 .header {
@@ -40,7 +43,6 @@ body {
   /* Wood: #c6b086, Darker skyblue: #1e8ebb, Yellow: #b4b40e */
   box-shadow: -3px -2px 0px #c6b086, 1px 1px 4px 2px #7198a7;
 }
-
 .subheader {
 	font-size: 18px;
 	padding-left: 4px;
@@ -186,7 +188,7 @@ body {
   color: #d5d5d5;
 }
 
-.cloud {
+.cloud1 {
 	width: 108px;
 	height: 36px;
 	background: #f7f7f7;
@@ -198,20 +200,20 @@ body {
   z-index: -1;
   margin: auto;
 }
-.cloud::after, .cloud::before {
+.cloud1::after, .cloud1::before {
    content: "";
    position: relative;
    display: inline-block;
    background: inherit;
    border-radius: inherit;
 }
-.cloud::before {
+.cloud1::before {
 	width: 58px;
 	height: 58px;
 	top: -26px;
   left: 38px;
 }
-.cloud::after {
+.cloud1::after {
 	width: 40px;
 	height: 40px;
 	top: -32px;
@@ -362,16 +364,36 @@ body {
 	}
 } */
 
-/* footer {
-  position: absolute;
-  margin: auto;
-  left: 0;
-  bottom: 0;
-  width: 50%;
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* height: 1200px; */
+  min-height: calc(100vh - 30px);
+}
+
+.footer-w {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  height: 200px;
+  background-color: seagreen;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* margin-top: auto; */
+  padding: 6px 0;
+  width: 100%;
+  /* position: absolute; */
+  /* left: 0; */
+  /* bottom: 0; */
   color: #a7a7a7;
   background-color: #343434;
-  text-align: center;
-  z-index: 0;
-  padding: 6px;
-  border-radius: 8px;
-} */
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}

@@ -67,7 +67,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     try {
       this._isMounted = true;
 
-      // await pause(1);
+      await pause(0.05);
 
       // Get all members
       let members = await getMembers();
@@ -84,8 +84,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
       if (this._isMounted) {
         console.log("Component mounted.");
-        this.setState({ members });
-        // this.setState({ members, loading: false });
+        // this.setState({ members });
+        this.setState({ members, loading: false });
       }
     } catch (error) {
       console.error(error);
@@ -102,7 +102,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
           const { live } = stream;
           const { title } = api;
           
-          let channelClass = "channel no-select";
+          let channelClass = "channel";
           if (live === true) {
             channelClass += " online";
           } else {
@@ -146,9 +146,6 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             </div>
           );
         })}
-        {/* <div id="footer">
-          <footer>This is the footer.</footer>
-        </div> */}
       </React.Fragment>
     );
   }
