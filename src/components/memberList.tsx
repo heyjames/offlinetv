@@ -3,6 +3,7 @@ import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
 import { getStreamer, getStream } from '../services/twitchService';
 import { Stream } from '../types/Stream';
+import LoadingWrapper from './loadingWrapper';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -83,7 +84,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
       if (this._isMounted) {
         console.log("Component mounted.");
-        this.setState({ members, loading: false });
+        this.setState({ members });
+        // this.setState({ members, loading: false });
       }
     } catch (error) {
       console.error(error);
@@ -150,24 +152,15 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       </React.Fragment>
     );
   }
-  
-  renderLoading() {
-    return (
-      <span id="loading-p">
-        <span></span>
-      </span>
-    );
-  }
 
   render() { 
     const { loading } = this.state;
 
     return (
       <div className="content">
-        {loading
-          ? this.renderLoading()
-          : this.populateList()
-        }
+        <LoadingWrapper loading={loading}>
+          {this.populateList()}
+        </LoadingWrapper>
       </div>
     );
   }
