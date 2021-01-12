@@ -144,6 +144,9 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             </div>
           );
         })}
+        {/* <div id="footer">
+          <footer>This is the footer.</footer>
+        </div> */}
       </React.Fragment>
     );
   }
