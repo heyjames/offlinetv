@@ -3,10 +3,9 @@ import './App.css';
 import MemberList from './components/memberList';
 
 function App() {
-  const aboutTitle: string = `I decided to make this because I couldn't find \
-a single place that aggregates Offline TV live streamers across \
-platforms and see if they're live. It was also a good opportunity to learn \
-TypeScript, React Hooks, and Flexbox.`;
+  const aboutTitle: string = `I decided to make this because I wanted \
+a simple website to find Offline TV and related live streamers across \
+platforms.`;
 
   return (
     <React.Fragment>

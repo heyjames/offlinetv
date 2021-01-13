@@ -116,6 +116,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
               onClick={() => this.handleClick(stream.url)}
             >
               <div className="avatar">
+                {/* <div className="avatar-ring"></div> */}
                 <img
                   className={stream.label.toLowerCase()}
                   src={api.logo || "/avatars/" + stream.avatar}
