@@ -1,3 +1,65 @@
+:root {
+}
+
+.theme-dark {
+  --color-background-offline-footer: #2c2c2c;
+  --color-text-game-and-title: #a7a7a7;
+  --background-online-and-footer: #434343;
+}
+
+.theme-light {
+  --color-background-offline-footer: #968f82;
+  --color-text-game-and-title: #c6c6c6;
+  --background-online-and-footer: #827c72;
+}
+
+.root-theme-dark {
+  --color-background-body: #272727;
+  --color-background-channel: var(--background-online-and-footer);
+  --color-background-channel-online-hover: #494949;
+  --color-border-channel-online: #5f5f5f;
+  --color-background-channel-offline: var(--color-background-offline-footer);
+
+  --color-name: #ededed;
+  --color-game: var(--color-text-game-and-title);
+  --color-stream-title: var(--color-text-game-and-title);
+  --color-view-count: #d5d5d5;
+
+  --color-border-loading-small-slice: #8c8c8c;
+  --color-border-loading-large-slice: #4b4b4b;
+
+  --color-border-footer: var(--background-online-and-footer);
+  --color-text-footer: var(--color-text-game-and-title);
+  --color-background-footer: var(--color-background-offline-footer);
+}
+
+.root-theme-light {
+  --color-background-body: #a49e92;
+  --color-background-channel: var(--background-online-and-footer);
+  --color-background-channel-online-hover: #888177;
+  --color-border-channel-online: #6c675e;
+  --color-background-channel-offline: var(--color-background-offline-footer);
+
+  --color-name: #fbfbfb;
+  --color-game: var(--color-text-game-and-title);
+  --color-stream-title: var(--color-text-game-and-title);
+  --color-view-count: #d2d2d2;
+
+  --color-border-loading-small-slice: #bfb9ad;
+  --color-border-loading-large-slice: var(--background-online-and-footer);
+
+  --color-border-footer: var(--background-online-and-footer);
+  --color-text-footer: var(--color-text-game-and-title);
+  --color-background-footer: var(--color-background-offline-footer);
+}
+/* #root {
+  color: #101010;
+} */
+
+body {
+  background-color: var(--color-background-body);
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -7,14 +69,6 @@
   user-select: none;
   /* margin: 10px; */
   padding: 0 4px;
-}
-
-body {
-  background: #272727;
-}
-
-#root {
-  color: #101010;
 }
 
 .masthead {
@@ -62,7 +116,7 @@ body {
   
   min-width: 300px;
   cursor: pointer;
-  background-color: #434343;
+  background-color: var(--color-background-channel);
   border-radius: 40px;
   height: 44px;
   margin-bottom: 6px;
@@ -70,22 +124,22 @@ body {
 .channel:last-child {
   margin-bottom: 0px;
 }
-.channel:hover {
-  background-color: #494949;
-}
+/* .channel:hover {
+  background-color: var(--color-background-channel-online-hover);
+} */
 
 .online .details .ng .name {
   font-weight: bold;
 }
 .online {
-  border: 1px solid #5f5f5f;
+  border: 1px solid var(--color-border-channel-online);
+}
+.online:hover {
+  background-color: var(--color-background-channel-online-hover);
 }
 
 .offline {
-  background-color: #2c2c2c;
-}
-.offline:hover {
-  background-color: #2c2c2c;
+  background-color: var(--color-background-channel-offline);
 }
 /* .offline .avatar img {
   filter: grayscale(100%);
@@ -158,7 +212,7 @@ body {
   overflow: hidden;
   
   text-decoration: none;
-  color: #ededed;
+  color: var(--color-name);
   outline: 0;
   font-size: 14px;
 }
@@ -169,7 +223,7 @@ body {
   align-self: flex-start;
   
   font-size: 14px;
-  color: #a7a7a7;
+  color: var(--color-game);
 }
 
 .details {
@@ -192,7 +246,7 @@ body {
 
   font-size: 14px;
   max-width: 100%;
-  color: #a7a7a7;
+  color: var(--color-stream-title);
 }
 
 .view-count {
@@ -206,7 +260,7 @@ body {
   min-width: 36px;
   max-width: 100%;
   font-size: 14px;
-  color: #d5d5d5;
+  color: var(--color-view-count);
 }
 
 .cloud1 {
@@ -291,7 +345,7 @@ body {
 	justify-content: center;
   align-items: center;
   height: 44px;
-  color: #ffffff;
+  color: var(--color-loading-small-slice);
 }
 
 /* Source: https://codepen.io/mandelid/pen/vwKoe */
@@ -299,9 +353,9 @@ body {
   display: inline-block;
   width: 25px;
   height: 25px;
-  border: 4px solid #7bc5e3;
+  border: 4px solid var(--color-border-loading-large-slice);
   border-radius: 50%;
-  border-top-color: #ffffff;
+  border-top-color: var(--color-border-loading-small-slice);
   animation: spin 1s linear infinite;
   -webkit-animation: spin 1s linear infinite;
 }
@@ -411,12 +465,12 @@ body {
   
   margin-left: -4px;
   padding: 6px 4px;
-  border-top: 1px solid #434343;
+  border-top: 1px solid var(--color-border-footer);
   font-size: 10px;
   height: 19px;
   width: 100%;
-  color: #707070;
-  background-color: #2c2c2c;
+  color: var(--color-text-footer);
+  background-color: var(--color-background-footer);
 }
 
 .footer span {

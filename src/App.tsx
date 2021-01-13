@@ -7,6 +7,9 @@ function App() {
 a simple website to find Offline TV and related live streamers across \
 platforms.`;
 
+  let body: any = document.querySelector("body");
+  body.className = "root-theme-light theme-light";
+
   return (
     <React.Fragment>
       <div className="App">
