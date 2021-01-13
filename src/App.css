@@ -7,12 +7,6 @@
   --background-online-and-footer: #434343;
 }
 
-.theme-light {
-  --color-background-offline-footer: #968f82;
-  --color-text-game-and-title: #c6c6c6;
-  --background-online-and-footer: #827c72;
-}
-
 .root-theme-dark {
   --color-background-body: #272727;
   --color-background-channel: var(--background-online-and-footer);
@@ -31,26 +25,39 @@
   --color-border-footer: var(--background-online-and-footer);
   --color-text-footer: var(--color-text-game-and-title);
   --color-background-footer: var(--color-background-offline-footer);
+  --color-shadow-moon: #383b4b;
 }
 
+/* default light dac4a0
+lilypichu fdc5d2
+sykkuno 7bbc98 */
+.theme-light {
+  --specific: #dac4a0;
+	--color-background-offline-footer: rgba(0, 0, 0, 0.06);
+	--color-white: #ffffff;
+  --background-online-and-footer: rgba(0, 0, 0, 0.175);
+  --color-channel-hover: rgba(0, 0, 0, 0.15);
+  --color-border-channel-online-moon: rgba(0, 0, 0, 0.2);
+  --color-bright-white: rgba(255, 255, 255, 0.8);
+}
 .root-theme-light {
-  --color-background-body: #a49e92;
-  --color-background-channel: var(--background-online-and-footer);
-  --color-background-channel-online-hover: #888177;
-  --color-border-channel-online: #6c675e;
-  --color-background-channel-offline: var(--color-background-offline-footer);
-
-  --color-name: #fbfbfb;
-  --color-game: var(--color-text-game-and-title);
-  --color-stream-title: var(--color-text-game-and-title);
-  --color-view-count: #d2d2d2;
-
-  --color-border-loading-small-slice: #bfb9ad;
-  --color-border-loading-large-slice: var(--background-online-and-footer);
-
-  --color-border-footer: var(--background-online-and-footer);
-  --color-text-footer: var(--color-text-game-and-title);
+	--color-background-body: var(--specific);
+	--color-background-channel: var(--background-online-and-footer);
+	--color-background-channel-online-hover: var(--color-channel-hover);
+	--color-border-channel-online: var(--color-border-channel-online-moon);
+	--color-background-channel-offline: var(--color-background-offline-footer);
+	--color-name: var(--color-white);
+	--color-game: var(--color-white);
+	--color-stream-title: var(--color-bright-white);
+	--color-view-count: var(--color-white);
+	--color-border-loading-small-slice: var(--color-bright-white);
+	--color-border-loading-large-slice: var(--background-online-and-footer);
+	--color-border-footer: var(--background-online-and-footer);
+	--color-text-footer: var(--color-white);
   --color-background-footer: var(--color-background-offline-footer);
+  --color-shadow-moon: var(--color-border-channel-online-moon);
+  --color-border-avatar-inner-ring: var(--background-online-and-footer);
+  --color-border-avatar-inner-ring-hover: var(--color-channel-hover);
 }
 /* #root {
   color: #101010;
@@ -137,9 +144,15 @@ body {
 .online:hover {
   background-color: var(--color-background-channel-online-hover);
 }
+.online:hover .avatar img {
+  border: 2px solid var(--color-border-avatar-inner-ring-hover);
+}
 
 .offline {
   background-color: var(--color-background-channel-offline);
+}
+.offline:hover .avatar img {
+  border: 2px solid var(--color-border-avatar-inner-ring);
 }
 /* .offline .avatar img {
   filter: grayscale(100%);
@@ -156,6 +169,7 @@ body {
   padding-left: 3px;
 }
 
+/* Not used */
 .avatar-ring {
   position: absolute;
   top: 0px;
@@ -182,7 +196,7 @@ body {
   background-size: cover;
   background-position: top center;
   border-radius: 50%;
-  border: 2px solid #4c4c4c;
+  border: 2px solid var(--color-border-avatar-inner-ring);
 }
 
 .youtube {
@@ -203,7 +217,7 @@ body {
   justify-content: space-around;
   align-items: flex-start;
   padding-left: 8px;
-  min-width: 112px;
+  min-width: 116px;
 }
 
 .name {
@@ -335,8 +349,8 @@ body {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  box-shadow: 6px 3px 0px 0px #383b4b;
-  /* z-index: -1; */
+  box-shadow: 6px 3px 0px 0px var(--color-shadow-moon);
+  z-index: -1;
 }
 
 #loading-p {
