@@ -3,6 +3,11 @@ import './App.css';
 import MemberList from './components/memberList';
 
 function App() {
+  const aboutTitle: string = `I decided to make this because I couldn't find \
+a single place that aggregates Offline TV live streamers across \
+platforms and see if they're live. It was also a good opportunity to learn \
+TypeScript, React Hooks, and Flexbox.`;
+
   return (
     <React.Fragment>
       <div className="App">
@@ -20,9 +25,10 @@ function App() {
           <MemberList />
         </div>
 
-        <div className="footer-w">
+        <div className="spacer"></div>
+        <div className="footer">
+          <span title={aboutTitle}>About</span>
         </div>
-        <div className="footer">This is the footer.</div>
 
       </div>
 
