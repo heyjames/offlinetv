@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import MemberList from './components/memberList';
-import Reload from './components/reload';
+import Refresh from './components/refresh';
 
 export interface AppProps {
   
@@ -38,7 +38,7 @@ find Offline TV and related live streamers across platforms.`;
             </div>
             <div className="notification">
               {/* <div className="message">Welcome!</div> */}
-              {/* <Reload /> */}
+              {/* <Refresh /> */}
             </div>
             
             <MemberList />
