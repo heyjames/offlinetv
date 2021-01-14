@@ -23,6 +23,9 @@
   --color-text-footer: var(--color-text-game-and-title);
   --color-background-footer: var(--color-background-offline-footer);
   --color-shadow-moon: #383b4b;
+  --color-border-avatar-inner-ring: rgba(0, 0, 0, 0.175);
+  --color-border-avatar-inner-ring-hover: rgba(0, 0, 0, 0.15);
+  --color-text-refresh: rgba(255, 255, 255, 0.3);
 }
 .lilypichu {
   background-color: #fdc5d2;
@@ -57,6 +60,7 @@
   --color-shadow-moon: var(--color-border-channel-online-moon);
   --color-border-avatar-inner-ring: var(--background-online-and-footer);
   --color-border-avatar-inner-ring-hover: var(--color-channel-hover);
+  --color-text-refresh: rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -124,7 +128,7 @@ body {
   max-width: 100%;
   height: 38px;
   /* background-color: red; */
-  color: rgba(0, 0, 0, 0.3);
+  color: var(--color-text-refresh);
 }
 
 .refresh {
