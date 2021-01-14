@@ -3,7 +3,7 @@ import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
 import { getStreamer, getStream } from '../services/twitchService';
 import { Stream } from '../types/Stream';
-import LoadingWrapper from './loadingWrapper';
+import Loading from './loading';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -67,7 +67,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     try {
       this._isMounted = true;
 
-      await pause(0.05);
+      // await pause(1.5);
 
       // Get all members
       let members = await getMembers();
@@ -156,9 +156,9 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
     return (
       <div className="content">
-        <LoadingWrapper loading={loading}>
+        <Loading loading={loading}>
           {this.populateList()}
-        </LoadingWrapper>
+        </Loading>
       </div>
     );
   }
