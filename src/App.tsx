@@ -15,7 +15,7 @@ export interface AppState {
 class App extends React.Component<AppProps, AppState> {
   componentDidMount() {
     let body: any = document.querySelector("body");
-    body.className = "root-theme-light theme-light sykkuno";
+    body.className = "root-theme-dark theme-dark";
   }
   
   render() { 
@@ -37,6 +37,7 @@ find Offline TV and related live streamers across platforms.`;
               <span className="cloud2"></span>
             </div>
             <div className="notification">
+              {/* <div className="message">Welcome!</div> */}
               {/* <Reload /> */}
             </div>
             

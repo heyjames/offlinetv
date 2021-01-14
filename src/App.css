@@ -129,19 +129,35 @@ body {
   height: 38px;
   /* background-color: red; */
   color: var(--color-text-refresh);
+  font-size: 14px;
+}
+
+.message {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 48px;
+  margin-right: auto;
 }
 
 .refresh {
-  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  margin-left: auto;
   font-weight: bold;
   padding-right: 20px;
 }
 .refresh .text {
-  padding-right: 8px;
+  padding-left: 8px;
 }
 
-.refresh #loading-p span {
-  margin-bottom: -2px;
+.refresh #loading-p {
+  margin-bottom: -4px;
+  padding-left: 8px;
 }
 
 .channel {
