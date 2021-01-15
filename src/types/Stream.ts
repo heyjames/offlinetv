@@ -3,5 +3,6 @@ export interface Stream {
   game?: string,
   lastStream?: string,
   title?: string,
-  logo?: string
+  logo?: string,
+  followers?: string
 }

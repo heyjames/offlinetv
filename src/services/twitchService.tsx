@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const client_id = process.env.REACT_APP_TWITCH_KEY + "B";
+const client_id = process.env.REACT_APP_TWITCH_KEY;
 const acceptLink = "application/vnd.twitchtv.v5+json";
 
 const TwitchAPI = axios.create({

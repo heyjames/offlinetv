@@ -32,34 +32,41 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   }
 
   // TODO: Refactor to be more abstract.
-  // getAPI = async () => {
-  //   for (let i=0; i<members.length; i++) {
-  //     if (members[i].stream.label.toLowerCase() === "twitch") {
-  //       const streamerData = await getStreamer(members[i].stream.id);
-  //       const streamData = await getStream(members[i].stream.id);
+  getAPI = async (members: any) => {
+    for (let i=0; i<members.length; i++) {
+      if (members[i].stream.label.toLowerCase() === "twitch") {
+        try {
+          // const streamerData = await getStreamer(members[i].stream.id);
+          // const streamData = await getStream(members[i].stream.id);
+          // console.log(streamerData);
+          // console.log(streamData);
+          // let stream: Stream = {};
 
-  //       let stream: Stream = {};
+          // if (streamerData !== null) {
+          //   stream.logo = streamerData.logo;
+          // }
 
-  //       if (streamerData !== null) {
-  //         stream.logo = streamerData.logo;
-  //       }
+          // if (streamData !== null) {
+          //   stream.viewers = streamData.viewers;
+          //   stream.game = streamData.game;
+          //   stream.lastStream = streamData.created_at;
+          //   stream.title = streamData.channel.status;
+          //   stream.followers = streamData.channel.followers;
 
-  //       if (streamData !== null) {
-  //         stream.viewers = streamData.viewers;
-  //         stream.game = streamData.game;
-  //         stream.lastStream = streamData.created_at;
-  //         stream.title = streamData.channel.status;
-  //         stream.followers = streamData.channel.followers;
+          //   members[i].stream.live = true;
+          // }
 
-  //         members[i].stream.live = true;
-  //       }
+          // members[i].api = { ...members[i].api,  ...stream };
+        } catch (error) {
+          console.error("error", error);
+        }
+      } else {
+        console.log("Skipping non-Twitch streamers...");
+      }
+    }
 
-  //       members[i].api = { ...members[i].api,  ...stream };
-  //     } else {
-  //       console.log("Skipping non-Twitch streamers...");
-  //     }
-  //   }
-  // }
+    return members;
+  }
 
   async componentDidMount() {
     console.log("Component starting to mount...");
@@ -71,6 +78,12 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
       // Get all members
       let members = await getMembers();
+
+      // Use API here to merge data into members
+      // members = await this.getAPI(members);
+      // console.log("members", members);
+
+      // Sort
       // Get live members
       let liveMembers = members.filter((member) => member.stream.live === true);
       // Sort live members
@@ -100,7 +113,17 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
         {members.map((member: any, index) => {
           const { stream, api } = member;
           const { live } = stream;
-          const { title } = api;
+          const { title, lastStream } = api;
+          let elapsed = "";
+
+          if (lastStream !== undefined) {
+            const start = moment(lastStream);
+            const now = moment();
+            const hours = now.diff(start, "h");
+            const minutes = now.diff(start, "m") % 60;
+            elapsed = `(${hours}h ${minutes}m)`;
+            // elapsed = `${hours}:${minutes}`;
+          }
           
           let channelClass = "channel";
           if (live === true) {
@@ -140,8 +163,9 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                   </div>
                 </div>
         
-                <div className="view-count">
-                  {live && (api.viewers && api.viewers.toLocaleString())}
+                <div className="view-count-p">
+                  <div className="view-count">{live && (api.viewers && api.viewers.toLocaleString())}</div>
+                  <div className="uptime">{elapsed}</div>
                 </div>
               </div>
             </div>
