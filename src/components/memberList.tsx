@@ -121,8 +121,11 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             const now = moment();
             const hours = now.diff(start, "h");
             const minutes = now.diff(start, "m") % 60;
-            elapsed = `(${hours}h ${minutes}m)`;
-            // elapsed = `${hours}:${minutes}`;
+            let decimalHours = Math.round((minutes / 60) * 10) / 10;
+            elapsed = `${hours + decimalHours} hrs`;
+
+            console.log(hours);
+            console.log(decimalHours);
           }
           
           let channelClass = "channel";
@@ -164,8 +167,13 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                 </div>
         
                 <div className="view-count-p">
-                  <div className="view-count">{live && (api.viewers && api.viewers.toLocaleString())}</div>
-                  <div className="uptime">{elapsed}</div>
+                  <div className="view-count">
+                    {live && (api.viewers && api.viewers.toLocaleString())}
+                  </div>
+                  <div className="uptime">
+                    {/* <i className="far fa-clock fa-xs"></i> */}
+                    {lastStream && elapsed}
+                  </div>
                 </div>
               </div>
             </div>

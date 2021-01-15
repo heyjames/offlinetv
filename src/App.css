@@ -113,7 +113,7 @@ body {
 	position: absolute;
 	margin-top: 30px;
 	transform: rotate(-10deg);
-	margin-left: -46px;
+	margin-left: -58px;
 	text-shadow: 2px 2px 0px #0094ce;
   cursor: default;
 }
@@ -179,7 +179,7 @@ body {
   background-color: var(--color-background-channel-online-hover);
 } */
 
-.online .details .ng .name {
+.online .name {
   font-weight: bold;
 }
 .online {
@@ -206,6 +206,7 @@ body {
 }
 .offline:hover .avatar, .offline:hover .details {
   opacity: 0.8;
+  text-shadow: 1px 1px 0px black;
 }
 
 .avatar {
@@ -262,7 +263,7 @@ body {
   justify-content: space-around;
   align-items: flex-start;
   padding-left: 8px;
-  min-width: 116px;
+  min-width: 120px;
 }
 
 .name {
@@ -272,6 +273,7 @@ body {
   
   text-decoration: none;
   color: var(--color-name);
+
   outline: 0;
   font-size: 14px;
 }
@@ -287,8 +289,12 @@ body {
 
 .uptime {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.25);
   white-space: nowrap;
+}
+.online:hover .uptime {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 1px 1px 0px black;
 }
 
 .details {
@@ -302,6 +308,7 @@ body {
   flex-direction: column;
   align-self: flex-start;
   min-width: 0;
+  filter: grayscale(100%);
 }
 
 .stream-title {
@@ -317,7 +324,7 @@ body {
 .view-count-p {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-end;
   margin-left: auto;
   padding-left: 14px;
@@ -325,6 +332,7 @@ body {
 
   /* min-width: 36px; */
   max-width: 100%;
+  white-space: nowrap;
 }
 
 .view-count {
