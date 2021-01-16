@@ -1,3 +1,33 @@
+:root {
+  --color-background-offline-footer: #2c2c2c;
+  --color-text-game-and-title: #a7a7a7;
+  --background-online-and-footer: #434343;
+
+  --color-background-body: #272727;
+  --color-background-channel: var(--background-online-and-footer);
+  --color-background-channel-online-hover: #494949;
+  --color-border-channel-online: #5f5f5f;
+  --color-background-channel-offline: var(--color-background-offline-footer);
+
+  --color-name: #ededed;
+  --color-game: var(--color-text-game-and-title);
+  --color-stream-title: var(--color-text-game-and-title);
+  --color-view-count: #d5d5d5;
+
+  --color-border-loading-small-slice: #8c8c8c;
+  --color-border-loading-large-slice: #4b4b4b;
+
+  --color-border-footer: var(--background-online-and-footer);
+  --color-text-footer: var(--color-text-game-and-title);
+  --color-background-footer: var(--color-background-offline-footer);
+  --color-shadow-moon: #383b4b;
+  --color-border-avatar-inner-ring: rgba(0, 0, 0, 0.175);
+  --color-border-avatar-inner-ring-hover: rgba(0, 0, 0, 0.15);
+  --color-text-refresh: rgba(255, 255, 255, 0.3);
+
+  --color-text-shadow-footer: #000000;
+  --color-text-uptime: rgba(255, 255, 255, 0.3);
+}
 .theme-dark {
   --color-background-offline-footer: #2c2c2c;
   --color-text-game-and-title: #a7a7a7;
@@ -26,12 +56,15 @@
   --color-border-avatar-inner-ring: rgba(0, 0, 0, 0.175);
   --color-border-avatar-inner-ring-hover: rgba(0, 0, 0, 0.15);
   --color-text-refresh: rgba(255, 255, 255, 0.3);
+
+  --color-text-shadow-footer: #000000;
+  --color-text-uptime: rgba(255, 255, 255, 0.3);
 }
 .lilypichu {
   background-color: #fdc5d2;
 }
 .sykkuno {
-  background-color: #7bbc98;
+  background-color: #31b193;
 }
 .theme-light {
   --specific: #dac4a0;
@@ -41,6 +74,9 @@
   --color-channel-hover: rgba(0, 0, 0, 0.15);
   --color-border-channel-online-moon: rgba(0, 0, 0, 0.2);
   --color-bright-white: rgba(255, 255, 255, 0.8);
+  
+  /* background-color: var(--color-background-footer);
+  color: var(--color-text-footer); */
 }
 .root-theme-light {
 	--color-background-body: var(--specific);
@@ -55,12 +91,15 @@
 	--color-border-loading-small-slice: var(--color-bright-white);
 	--color-border-loading-large-slice: var(--background-online-and-footer);
 	--color-border-footer: var(--background-online-and-footer);
-	--color-text-footer: var(--color-white);
-  --color-background-footer: var(--color-background-offline-footer);
+	--color-text-footer: #ffffff;
+  --color-background-footer: rgba(0, 0, 0, 0.17);
   --color-shadow-moon: var(--color-border-channel-online-moon);
   --color-border-avatar-inner-ring: var(--background-online-and-footer);
   --color-border-avatar-inner-ring-hover: var(--color-channel-hover);
   --color-text-refresh: rgba(0, 0, 0, 0.3);
+
+  --color-text-shadow-footer: #000000;
+  --color-text-uptime: rgba(255, 255, 255, 0.4);
 }
 
 body {
@@ -197,10 +236,12 @@ body {
 /* .offline .avatar img {
   filter: grayscale(100%);
 } */
-.offline .avatar, .offline .details {
+.offline .avatar,
+.offline .details {
   opacity: 0.35;
 }
-.offline:hover .avatar, .offline:hover .details {
+.offline:hover .avatar,
+.offline:hover .details {
   opacity: 0.8;
   text-shadow: 1px 1px 0px black;
 }
@@ -285,7 +326,7 @@ body {
 
 .uptime {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--color-text-uptime);
   white-space: nowrap;
 }
 
@@ -341,7 +382,8 @@ body {
   z-index: -1;
   margin: auto;
 }
-.cloud1::after, .cloud1::before {
+.cloud1::after,
+.cloud1::before {
    content: "";
    position: relative;
    display: inline-block;
@@ -373,7 +415,8 @@ body {
   z-index: 1;
   margin: auto;
 }
-.cloud2::after, .cloud2::before {
+.cloud2::after,
+.cloud2::before {
    content: "";
    position: relative;
    display: inline-block;
@@ -461,13 +504,30 @@ body {
   border-top: 1px solid var(--color-border-footer);
   margin-left: -4px;
   padding: 6px 4px;
-  font-size: 10px;
+  font-size: 12px;
   background-color: var(--color-background-footer);
   color: var(--color-text-footer);
 }
 
-.footer span {
+.footer .theme-label {
+  display: inline-block;
+  text-align: center;
+  padding: 3px 4px;
+  text-shadow: 1px 1px 1px var(--color-text-shadow-footer);
+  font-weight: bold;
+}
+
+.footer .theme-back,
+.footer .theme-forward {
+  padding: 3px 7px;
+  text-shadow: 1px 1px 1px var(--color-text-shadow-footer);
+  cursor: pointer;
+}
+
+.footer .theme .theme-label {
+  width: 56px;
+}
+
+.about {
   cursor: help;
-  padding: 3px 10px;
-  text-shadow: 1px 1px 0px #000000;
 }

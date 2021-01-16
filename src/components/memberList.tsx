@@ -124,8 +124,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
             let decimalHours = Math.round((minutes / 60) * 10) / 10;
             elapsed = `${hours + decimalHours} hrs`;
 
-            console.log(hours);
-            console.log(decimalHours);
+            // console.log(hours);
+            // console.log(decimalHours);
           }
           
           let channelClass = "channel";

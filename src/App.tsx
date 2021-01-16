@@ -1,17 +1,49 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import MemberList from './components/memberList';
+import React, { useState, useEffect } from 'react';
+import Masthead from './components/masthead';
 import Refresh from './components/refresh';
-import { pause } from './utils';
+import MemberList from './components/memberList';
+import './App.css';
 
 function App() {
-  useEffect(() => {
-    (async () => {
-      // await pause(2); // TODO: Set a fallback color theme in css file.
+  enum ThemeLabel {
+    Dark,
+    Light,
+    Lilypichu,
+    Sykkuno
+  }
+  enum Theme {
+    Dark = "root-theme-dark theme-dark",
+    Light = "root-theme-light theme-light",
+    Lilypichu = "root-theme-light theme-light lilypichu",
+    Sykkuno = "root-theme-light theme-light sykkuno"
+  }
+
+  let theme = localStorage.getItem("theme");
+  let myNum: any;
+  if (theme !== null) {
+    myNum = parseInt(theme);
+  }
   
-      let body: any = document.querySelector("body");
-      body.className = "root-theme-dark theme-dark";
-    })();
+  const [count, setCount] = useState(myNum);
+  useEffect(() => {
+    if (count <= -1) setCount(3);
+    if (count >= 4) setCount(0);
+  });
+  
+  useEffect(() => {
+    console.log(localStorage.getItem("theme"));
+    console.log("count", count);
+  });
+
+  useEffect(() => {
+    let body: any = document.querySelector("body");
+
+    if (count === 0) body.className = Theme.Dark;
+    if (count === 1) body.className = Theme.Light;
+    if (count === 2) body.className = Theme.Lilypichu;
+    if (count === 3) body.className = Theme.Sykkuno;
+    
+    localStorage.setItem("theme", count.toString());
   });
 
   const aboutTitle: string = `I made this to quickly find Offline TV and \
@@ -22,26 +54,34 @@ related live streamers across platforms.`;
       <div className="App">
 
         <div className="main">
-          <div className="masthead">
-            <div className="moon"></div>
-            <div className="cloud1"></div>
-            <h1>
-              <span className="header">OFFLINE TV</span>
-              <span className="subheader">& FRIENDS!</span>
-            </h1>
-            <span className="cloud2"></span>
-          </div>
+          <Masthead />
+      
           <div className="notification">
             {/* <div className="message">Welcome!</div> */}
             {/* <Refresh /> */}
           </div>
-          
+      
           <MemberList />
         </div>
 
         <div className="spacer"></div>
+
+        {/* // TODO: Extract footer to own module. */}
         <div className="footer">
-          <span title={aboutTitle}>About</span>
+          <span className="theme-label about" title={aboutTitle}>About</span>
+          <span className="theme">
+            <i
+              className="fas fa-caret-left theme-back"
+              onClick={() => setCount(count - 1)}
+              >
+            </i>
+            <span className="theme-label">{ThemeLabel[count]}</span>
+            <i
+              className="fas fa-caret-right theme-forward"
+              onClick={() => setCount(count + 1)}
+            >
+            </i>
+          </span>
         </div>
 
       </div>
