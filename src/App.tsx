@@ -10,7 +10,7 @@ function App() {
       // await pause(2); // TODO: Set a fallback color theme in css file.
   
       let body: any = document.querySelector("body");
-      body.className = "root-theme-light theme-light";
+      body.className = "root-theme-dark theme-dark";
     })();
   });
 
@@ -45,9 +45,6 @@ related live streamers across platforms.`;
         </div>
 
       </div>
-
-      {/* <div id="spacer"></div> */}
-      {/* <div id="site-info-p"><span id="site-info">?</span></div> */}
     </React.Fragment>
   );
 }
