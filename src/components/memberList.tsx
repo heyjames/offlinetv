@@ -60,10 +60,6 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     this.populateMembers();
   }
 
-  handleClick(url: string) {
-    window.open(url, "_blank");
-  }
-
   // TODO: Refactor to be more abstract.
   async getAPI(members: any) {
     for (let i=0; i<members.length; i++) {

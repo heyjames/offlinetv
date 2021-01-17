@@ -27,6 +27,7 @@
   --size-text-stream-title: 0.9em;
   --size-text-view-count: 0.95em;
   --size-text-uptime: 0.75em;
+  --size-text-refresh-label: 0.85em;
 }
 .theme-dark {
   --color-background-body: #272727;
@@ -51,6 +52,7 @@
   --color-text-uptime: rgba(255, 255, 255, 0.3);
   --color-offline-name: #ededed;
   --color-border-channel-online-hover: #a9a9a9;
+  --size-text-refresh-label: 0.85em;
 }
 
 .theme-lilypichu {
@@ -61,6 +63,9 @@
   --color-background-body: #31b193 !important;
   --color-text-uptime: rgba(255, 255, 255, 0.5) !important;
   --color-game: rgba(255, 255, 255, 0.7) !important;
+  --color-text-refresh: rgb(72, 255, 212) !important;
+  --color-border-loading-large-slice: rgb(72, 255, 212) !important;
+  --color-offline-name: #ffffff !important;
 }
 
 .theme-light {
@@ -86,6 +91,7 @@
   --color-text-uptime: rgba(255, 255, 255, 0.7);
   --color-offline-name: #000000;
   --color-border-channel-online-hover: var(--color-border-channel-online);
+  --size-text-refresh-label: 0.85em;
 }
 
 body {
@@ -171,10 +177,12 @@ body {
   flex-wrap: nowrap;
   margin-left: auto;
   font-weight: bold;
+  font-size: var(--size-text-refresh-label);
   padding-right: 20px;
 }
-.refresh .text {
+.refresh .refresh-label {
   padding-left: 8px;
+  margin-top: 1px;
 }
 .refresh #loading-p {
   padding-left: 8px;
