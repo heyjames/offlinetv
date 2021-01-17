@@ -61,6 +61,8 @@
 
 .theme-sykkuno {
   --color-background-body: #31b193 !important;
+  --color-text-uptime: rgba(255, 255, 255, 0.5) !important;
+  --color-game: rgba(255, 255, 255, 0.7) !important;
 }
 
 .theme-light {

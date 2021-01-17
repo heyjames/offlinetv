@@ -102,7 +102,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     try {
       this._isMounted = true;
 
-      await pause(1.5);
+      // await pause(1.5);
 
       // Get all members
       let members = await getMembers();

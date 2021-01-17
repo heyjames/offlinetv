@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Theme, ThemeLabel } from './types/Theme';
+import { THEMES } from './models/themes';
 import Masthead from './components/masthead';
 import MemberList from './components/memberList';
 import './App.css';
@@ -8,7 +8,7 @@ function App() {
   // Get theme from local storage.
   const theme: string | null | undefined = localStorage.getItem("theme");
 
-  // If theme from local storage exists, set state to theme themeID
+  // If theme from local storage exists, set themeID state.
   const initThemeID: number = (theme !== null) ? parseInt(theme) : 0;
   const [themeID, setThemeID] = useState(initThemeID);
 
@@ -19,10 +19,7 @@ function App() {
     
     // Set the body HTML node class name.
     let body: any = document.querySelector("body");
-    if (themeID === 0) body.className = Theme.Dark;
-    if (themeID === 1) body.className = Theme.Light;
-    if (themeID === 2) body.className = Theme.LilyPichu;
-    if (themeID === 3) body.className = Theme.Sykkuno;
+    body.className = THEMES[themeID]?.classLabel;
     
     localStorage.setItem("theme", themeID.toString());
   }, [themeID]);
@@ -36,13 +33,12 @@ related live streamers across platforms.`;
 
         <div className="main">
           <Masthead />
-      
           <MemberList />
         </div>
 
         <div className="spacer"></div>
 
-        {/* // TODO: Extract footer to own module. */}
+        {/* // TODO: Extract footer to own Component. */}
         {/* // Component interface: aboutTitle, setThemeID, ThemeLabel[themeID] */}
         <div className="footer">
           <span className="theme-label about" title={aboutTitle}>About</span>
@@ -52,7 +48,12 @@ related live streamers across platforms.`;
               onClick={() => setThemeID(themeID - 1)}
               >
             </i>
-            <span className="theme-label">{ThemeLabel[themeID]}</span>
+            <span
+              className="theme-label"
+              title={THEMES[themeID]?.remark}
+            >
+              {THEMES[themeID]?.label}
+            </span>
             <i
               className="fas fa-caret-right theme-forward"
               onClick={() => setThemeID(themeID + 1)}
