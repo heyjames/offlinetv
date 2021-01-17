@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { Stream, Streamer } from '../types/Stream';
 import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
 import { getStreamer, getStream } from '../services/twitchService';
-import { Stream } from '../types/Stream';
+import Refresh from './refresh';
 import Loading from './loading';
 import _ from 'lodash';
 import moment from 'moment';
@@ -12,19 +13,48 @@ export interface MemberListProps {
  
 export interface MemberListState {
   loading: boolean,
-  members: Array<any>
+  refreshing: boolean,
+  members: Array<any>,
 }
 
 class MemberList extends React.Component<MemberListProps, MemberListState> {
-  state = {
-    loading: true,
-    members: []
-  };
+  constructor(props: MemberListProps) {
+    super(props);
+    
+    this.state = {
+      loading: true,
+      refreshing: false,
+      members: []
+    };
+
+    this.setMembers = this.setMembers.bind(this);
+    this.autoRefresh = this.autoRefresh.bind(this);
+  }
   
   _isMounted = false;
+  _intervalID: number | null | undefined;
+  _interval: number = 60000; // Milliseconds to refresh content.
 
   componentWillUnmount() {
     this._isMounted = false;
+
+    if (this._intervalID !== null && this._intervalID !== undefined) {
+      clearInterval(this._intervalID);
+    }
+  }
+
+  componentDidMount() {
+    console.log("Mounting....");
+    this.setMembers();
+
+    if (this._intervalID) clearInterval(this._intervalID);
+    const _intervalID = setInterval(this.autoRefresh, this._interval);
+  }
+
+  async autoRefresh() {
+    if (this._isMounted) this.setState({ refreshing: true });
+    await pause(4.5);
+    this.setMembers();
   }
 
   handleClick(url: string) {
@@ -68,13 +98,11 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     return members;
   }
 
-  async componentDidMount() {
-    console.log("Component starting to mount...");
-
+  async setMembers() {
     try {
       this._isMounted = true;
 
-      // await pause(1.5);
+      await pause(1.5);
 
       // Get all members
       let members = await getMembers();
@@ -96,9 +124,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       members = [ ...liveMembers, ...members ];
 
       if (this._isMounted) {
-        console.log("Component mounted.");
-        // this.setState({ members });
-        this.setState({ members, loading: false });
+        console.log("Mounted!");
+        this.setState({ members, loading: false, refreshing: false });
       }
     } catch (error) {
       console.error(error);
@@ -171,7 +198,6 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                     {live && (api.viewers && api.viewers.toLocaleString())}
                   </div>
                   <div className="uptime">
-                    {/* <i className="far fa-clock fa-xs"></i> */}
                     {lastStream && elapsed}
                   </div>
                 </div>
@@ -184,10 +210,15 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   }
 
   render() { 
-    const { loading } = this.state;
+    const { loading, refreshing } = this.state;
 
     return (
       <div className="content">
+        <div className="notification">
+          {/* <div className="message">Welcome!</div> */}
+          { (!loading && refreshing) && <Refresh refreshing={refreshing}/>}
+        </div>
+
         <Loading loading={loading}>
           {this.populateList()}
         </Loading>

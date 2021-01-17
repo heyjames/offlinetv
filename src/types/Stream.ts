@@ -6,3 +6,7 @@ export interface Stream {
   logo?: string,
   followers?: string
 }
+
+export interface Streamer {
+  logo?: string
+}

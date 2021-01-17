@@ -1,10 +1,10 @@
 import Loading from './loading';
 
-function Refresh() {
+function Refresh(refreshing: any) {
   return (
     <div className="refresh">
       {/* <span className="text">REFRESHING</span> */}
-      <Loading loading={true} size="xs" />
+      <Loading loading={refreshing} size="xs" />
     </div>
   )
 }
