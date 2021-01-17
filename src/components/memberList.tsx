@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { Stream, Streamer } from '../types/Stream';
+// import { Stream, Streamer } from '../types/Stream';
 import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
-import { getStreamer, getStream } from '../services/twitchService';
+// import { getStreamer, getStream } from '../services/twitchService';
 import Refresh from './refresh';
 import Loading from './loading';
-import _ from 'lodash';
-import moment from 'moment';
+// import _ from 'lodash';
+import Avatar from './avatar';
+import Name from './name';
+import Channel from './channel';
+import Uptime from './uptime';
 
 export interface MemberListProps {
 }
@@ -27,12 +30,12 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       members: []
     };
 
-    this.setMembers = this.setMembers.bind(this);
+    this.populateMembers = this.populateMembers.bind(this);
     this.autoRefresh = this.autoRefresh.bind(this);
   }
   
   _isMounted = false;
-  _intervalID: number | null | undefined;
+  _intervalID: any;
   _interval: number = 60000; // Milliseconds to refresh content.
 
   componentWillUnmount() {
@@ -45,16 +48,16 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
   componentDidMount() {
     console.log("Mounting....");
-    this.setMembers();
+    this.populateMembers();
 
     if (this._intervalID) clearInterval(this._intervalID);
-    const _intervalID = setInterval(this.autoRefresh, this._interval);
+    this._intervalID = setInterval(this.autoRefresh, this._interval);
   }
 
   async autoRefresh() {
     if (this._isMounted) this.setState({ refreshing: true });
     await pause(4.5);
-    this.setMembers();
+    this.populateMembers();
   }
 
   handleClick(url: string) {
@@ -62,7 +65,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   }
 
   // TODO: Refactor to be more abstract.
-  getAPI = async (members: any) => {
+  async getAPI(members: any) {
     for (let i=0; i<members.length; i++) {
       if (members[i].stream.label.toLowerCase() === "twitch") {
         try {
@@ -98,7 +101,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     return members;
   }
 
-  async setMembers() {
+  async populateMembers() {
     try {
       this._isMounted = true;
 
@@ -132,85 +135,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     }
   }
 
-  populateList() {
-    const { members } = this.state;
-
-    return (
-      <React.Fragment>
-        {members.map((member: any, index) => {
-          const { stream, api } = member;
-          const { live } = stream;
-          const { title, lastStream } = api;
-          let elapsed = "";
-
-          if (lastStream !== undefined) {
-            const start = moment(lastStream);
-            const now = moment();
-            const hours = now.diff(start, "h");
-            const minutes = now.diff(start, "m") % 60;
-            let decimalHours = Math.round((minutes / 60) * 10) / 10;
-            elapsed = `${hours + decimalHours} hrs`;
-
-            // console.log(hours);
-            // console.log(decimalHours);
-          }
-          
-          let channelClass = "channel";
-          if (live === true) {
-            channelClass += " online";
-          } else {
-            channelClass += " offline";
-          }
-
-          return (
-            <div 
-              className={channelClass}
-              key={index}
-              onClick={() => this.handleClick(stream.url)}
-            >
-              <div className="avatar">
-                {/* <div className="avatar-ring"></div> */}
-                <img
-                  className={stream.label.toLowerCase()}
-                  src={api.logo || "/avatars/" + stream.avatar}
-                  alt={member.alias.charAt(0)}
-                />
-              </div>
-              
-              <div className="details">
-                <div className="ng">
-                  <div className="name">
-                    {member.alias}
-                  </div>
-                  <div className="game">
-                    {live && api.game}
-                  </div>
-                </div>
-                
-                <div className="stream-title-p">
-                  <div className="stream-title" title={title}>
-                    {live && title}
-                  </div>
-                </div>
-        
-                <div className="view-count-p">
-                  <div className="view-count">
-                    {live && (api.viewers && api.viewers.toLocaleString())}
-                  </div>
-                  <div className="uptime">
-                    {lastStream && elapsed}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </React.Fragment>
-    );
-  }
-
   render() { 
-    const { loading, refreshing } = this.state;
+    const { loading, refreshing, members } = this.state;
 
     return (
       <div className="content">
@@ -220,7 +146,46 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
         </div>
 
         <Loading loading={loading}>
-          {this.populateList()}
+          {members.map((member: any, index) => {
+            const { stream, api } = member;
+            const { live } = stream;
+            const { title, lastStream } = api;
+
+            return (
+              <Channel key={index} member={member}>
+                <Avatar member={member}>
+                  {/* <div className="avatar-ring"></div> */}
+                  <img
+                    className={stream.label.toLowerCase()}
+                    src={api.logo || "/avatars/" + stream.avatar}
+                    alt={member.alias.charAt(0)}
+                  />
+                </Avatar>
+              
+                <div className="details">
+                  <div className="ng">
+                    <Name member={member} />
+                    <div className="game">
+                      {live && api.game}
+                    </div>
+                  </div>
+                  
+                  <div className="stream-title-p">
+                    <div className="stream-title" title={title}>
+                      {live && title}
+                    </div>
+                  </div>
+
+                  <div className="view-count-p">
+                    <div className="view-count">
+                      {live && (api.viewers && api.viewers.toLocaleString())}
+                    </div>
+                    <Uptime lastStream={lastStream} />
+                  </div>
+                </div>
+              </Channel>
+            );
+          })}
         </Loading>
       </div>
     );

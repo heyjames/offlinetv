@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { THEMES } from './models/themes';
 import Masthead from './components/masthead';
 import MemberList from './components/memberList';
+import Footer from './components/footer';
 import './App.css';
 
 function App() {
@@ -21,11 +22,9 @@ function App() {
     let body: any = document.querySelector("body");
     body.className = THEMES[themeID]?.classLabel;
     
+    // Save themeID to local storage.
     localStorage.setItem("theme", themeID.toString());
   }, [themeID]);
-
-  const aboutTitle: string = `I made this to quickly find Offline TV and \
-related live streamers across platforms.`;
 
   return (
     <React.Fragment>
@@ -37,30 +36,7 @@ related live streamers across platforms.`;
         </div>
 
         <div className="spacer"></div>
-
-        {/* // TODO: Extract footer to own Component. */}
-        {/* // Component interface: aboutTitle, setThemeID, ThemeLabel[themeID] */}
-        <div className="footer">
-          <span className="theme-label about" title={aboutTitle}>About</span>
-          <span className="theme">
-            <i
-              className="fas fa-caret-left theme-back"
-              onClick={() => setThemeID(themeID - 1)}
-              >
-            </i>
-            <span
-              className="theme-label"
-              title={THEMES[themeID]?.remark}
-            >
-              {THEMES[themeID]?.label}
-            </span>
-            <i
-              className="fas fa-caret-right theme-forward"
-              onClick={() => setThemeID(themeID + 1)}
-            >
-            </i>
-          </span>
-        </div>
+        <Footer themeID={themeID} setThemeID={setThemeID} />
 
       </div>
     </React.Fragment>
