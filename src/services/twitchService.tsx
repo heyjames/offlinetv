@@ -1,22 +1,21 @@
 import axios from 'axios';
 
-const client_id = process.env.REACT_APP_TWITCH_KEY;
-const acceptLink = "application/vnd.twitchtv.v5+json";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+// const acceptLink = "application/vnd.twitchtv.v5+json";
+const OAUTH_TOKEN = process.env.REACT_APP_OAUTH_TOKEN;
 
 const TwitchAPI = axios.create({
-  baseURL: "https://api.twitch.tv/kraken/",
+  baseURL: "https://api.twitch.tv/helix/",
   headers: {
-    "Client-ID": client_id,
-    Accept: acceptLink
+    "Client-ID": CLIENT_ID,
+    "Authorization": "Bearer " + OAUTH_TOKEN
   }
 });
 
 export async function getStreamer(id: any) {
-  const response = await TwitchAPI.get(`users/${id}`);
-  return response.data;
+  return TwitchAPI.get(`users?id=${id}`);
 };
 
 export async function getStream(id: any) {
-  const response = await TwitchAPI.get(`streams/${id}`);
-  return response.data.stream;
+  return TwitchAPI.get(`streams?user_id=${id}&first=1`);
 };
