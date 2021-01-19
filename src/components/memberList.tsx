@@ -1,8 +1,8 @@
 import * as React from 'react';
-// import { Stream, Streamer } from '../types/Stream';
+import { Stream, Streamer } from '../types/Stream';
 import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
-// import { getStreamer, getStream } from '../services/twitchService';
+import { getStreamer, getStream } from '../services/twitchService';
 import Refresh from './refresh';
 import Loading from './loading';
 // import _ from 'lodash';
@@ -41,17 +41,17 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
   componentWillUnmount() {
     this._isMounted = false;
 
-    if (this._intervalID !== null && this._intervalID !== undefined) {
-      clearInterval(this._intervalID);
-    }
+    // if (this._intervalID !== null && this._intervalID !== undefined) {
+    //   clearInterval(this._intervalID);
+    // }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log("Mounting....");
     this.populateMembers();
 
-    if (this._intervalID) clearInterval(this._intervalID);
-    this._intervalID = setInterval(this.autoRefresh, this._interval);
+    // if (this._intervalID) clearInterval(this._intervalID);
+    // this._intervalID = setInterval(this.autoRefresh, this._interval);
   }
 
   async autoRefresh() {
@@ -60,32 +60,53 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     this.populateMembers();
   }
 
-  // TODO: Refactor to be more abstract.
+  // TODO: Refactor to be more abstract. Move to Node backend.
   async getAPI(members: any) {
-    for (let i=0; i<members.length; i++) {
+    // for (let i=0; i<members.length; i++) {
+    for (let i=0; i<3; i++) {
       if (members[i].stream.label.toLowerCase() === "twitch") {
         try {
-          // const streamerData = await getStreamer(members[i].stream.id);
-          // const streamData = await getStream(members[i].stream.id);
-          // console.log(streamerData);
-          // console.log(streamData);
-          // let stream: Stream = {};
+          const memberID = members[i].stream.id;
+          const memberAlias = members[i].alias;
+          console.log(`${memberID}: ${memberAlias}`);
 
-          // if (streamerData !== null) {
-          //   stream.logo = streamerData.logo;
-          // }
+          // Get live stream if available.
+          let streamData: any = await getStream(memberID);
+          const streamResponse = streamData.status; // 200
+          streamData = streamData.data.data[0];
 
-          // if (streamData !== null) {
-          //   stream.viewers = streamData.viewers;
-          //   stream.game = streamData.game;
-          //   stream.lastStream = streamData.created_at;
-          //   stream.title = streamData.channel.status;
-          //   stream.followers = streamData.channel.followers;
+          // Skip the rest of the loop if streamer isn't live.
+          if (streamData === undefined) {
+            console.log(`Skipping streamer: ${memberAlias}!!!!!!`);
+            members[i].stream.live = false;
+            members[i].api = {};
+            continue;
+          }
 
-          //   members[i].stream.live = true;
-          // }
+          // Get streamer info if available
+          let streamerData: any = await getStreamer(memberID);
+          const streamerResponse = streamerData.status; // 200
+          streamerData = streamerData.data.data[0];
+          
+          // Initialize object to merge with members.api.
+          let stream: Stream = {};
 
-          // members[i].api = { ...members[i].api,  ...stream };
+          // Set live stream data.
+          if (streamData !== undefined) {
+            stream.viewers = streamData.viewer_count;
+            stream.game = streamData.game_name;
+            stream.lastStream = streamData.started_at;
+            stream.title = streamData.title;
+            members[i].stream.live = true;
+          }
+
+          // Set profile URL.
+          if (streamerData !== undefined) {
+            stream.logo = streamData.profile_image_url;
+          }
+          
+          members[i].api = { ...members[i].api,  ...stream };
+          console.log(`Merged ${memberAlias}..........`);
         } catch (error) {
           console.error("error", error);
         }
@@ -107,8 +128,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       let members = await getMembers();
 
       // Use API here to merge data into members
-      // members = await this.getAPI(members);
-      // console.log("members", members);
+      members = await this.getAPI(members);
+      console.log("members", members);
 
       // Sort
       // Get live members
