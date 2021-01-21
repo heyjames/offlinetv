@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Stream, Streamer } from '../types/Stream';
 import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
-import { getStreamer, getStream } from '../services/twitchService';
+import { getStreamer, getStream, getMyAPI } from '../services/twitchService';
 import Refresh from './refresh';
 import Loading from './loading';
 // import _ from 'lodash';
@@ -125,19 +125,21 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
       // await pause(1.5);
 
       // Get all members
-      let members = await getMembers();
+      // let members = await getMembers();
 
       // Use API here to merge data into members
-      members = await this.getAPI(members);
-      console.log("members", members);
+      // members = await this.getAPI(members);
+      // console.log("members", members);
+
+      let { data: members }: any = await getMyAPI();
 
       // Sort
       // Get live members
-      let liveMembers = members.filter((member) => member.stream.live === true);
+      let liveMembers = members.filter((member: any) => member.stream.live === true);
       // Sort live members
       mySort(liveMembers, "api", "viewers");
       // Remove non-live members
-      members = members.filter((member) => member.stream.live === false);
+      members = members.filter((member: any) => member.stream.live === false);
       // Sort non-live members by followers
       mySort(members, "api", "followers");
       // Merge live and non-live members

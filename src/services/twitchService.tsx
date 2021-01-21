@@ -12,10 +12,14 @@ const TwitchAPI = axios.create({
   }
 });
 
-export async function getStreamer(id: any) {
+export function getStreamer(id: any) {
   return TwitchAPI.get(`users?id=${id}`);
-};
+}
 
-export async function getStream(id: any) {
+export function getStream(id: any) {
   return TwitchAPI.get(`streams?user_id=${id}&first=1`);
-};
+}
+
+export function getMyAPI() {
+  return axios.get("http://localhost:3001");
+}
