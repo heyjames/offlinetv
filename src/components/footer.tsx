@@ -1,4 +1,4 @@
-import { THEMES } from '../models/themes';
+import { themes } from '../models/themes';
 
 export interface FooterProps {
   themeID: number,
@@ -22,9 +22,9 @@ related live streamers across platforms.`;
 
         <span
           className="theme-label"
-          title={THEMES[themeID]?.remark}
+          title={themes[themeID] && themes[themeID].remark}
         >
-          {THEMES[themeID]?.label}
+          {themes[themeID] && themes[themeID].label}
         </span>
         
         <i

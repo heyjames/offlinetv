@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Stream, Streamer } from '../types/Stream';
 import { pause, mySort } from '../utils';
 import { getMembers } from '../services/memberService';
-import { getStreamer, getStream, getMyAPI } from '../services/twitchService';
+import { getMyAPI } from '../services/twitchService';
 import Refresh from './refresh';
 import Loading from './loading';
 // import _ from 'lodash';
@@ -11,13 +10,33 @@ import Name from './name';
 import Channel from './channel';
 import Uptime from './uptime';
 
+interface Member {
+  alias: string;
+  name: string;
+  stream: {
+    id: number;
+    label: string;
+    url: string;
+    live: boolean;
+    avatar: string;
+  },
+  api: {
+    viewers?: number;
+    game?: string;
+    lastStream?: string;
+    title?: string;
+    logo?: string;
+  },
+  links: any
+}
+
 export interface MemberListProps {
 }
  
 export interface MemberListState {
   loading: boolean,
   refreshing: boolean,
-  members: Array<any>,
+  members: Member[],
 }
 
 class MemberList extends React.Component<MemberListProps, MemberListState> {
@@ -34,124 +53,82 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     this.autoRefresh = this.autoRefresh.bind(this);
   }
   
-  _isMounted = false;
-  _intervalID: any;
+  _isMounted: boolean = false;
+  _intervalID: any = null;
   _interval: number = 60000; // Milliseconds to refresh content.
 
   componentWillUnmount() {
     this._isMounted = false;
 
-    // if (this._intervalID !== null && this._intervalID !== undefined) {
-    //   clearInterval(this._intervalID);
-    // }
+    if (this._intervalID !== null && this._intervalID !== undefined) {
+      clearInterval(this._intervalID);
+    }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log("Mounting....");
-    this.populateMembers();
 
-    // if (this._intervalID) clearInterval(this._intervalID);
-    // this._intervalID = setInterval(this.autoRefresh, this._interval);
+    this.getData();
+
+    if (this._intervalID) clearInterval(this._intervalID);
+    this._intervalID = setInterval(this.autoRefresh, this._interval);
   }
 
   async autoRefresh() {
-    if (this._isMounted) this.setState({ refreshing: true });
-    await pause(4.5);
-    this.populateMembers();
+    if (this._isMounted) {
+      this.setState({ refreshing: true });
+    }
+
+    await pause(5000); // Show a lengthy loading animation to user.
+
+    this.getData();
   }
 
-  // TODO: Refactor to be more abstract. Move to Node backend.
-  async getAPI(members: any) {
-    // for (let i=0; i<members.length; i++) {
-    for (let i=0; i<3; i++) {
-      if (members[i].stream.label.toLowerCase() === "twitch") {
-        try {
-          const memberID = members[i].stream.id;
-          const memberAlias = members[i].alias;
-          console.log(`${memberID}: ${memberAlias}`);
+  async getData() {
+    try {
+      // Get members from node API.
+      let { data: members } = await getMyAPI();
+      this.populateMembers(members, true);
+    } catch (error) {
+      console.error("A network error has occurred. Falling back to offline (^_^) mode.");
+      // TODO: Send a message to a notification area.
+      
+      // Get members from offline JSON.
+      let members: Member[] = await getMembers();
+      this.populateMembers(members, false);
+    }
+  }
 
-          // Get live stream if available.
-          let streamData: any = await getStream(memberID);
-          const streamResponse = streamData.status; // 200
-          streamData = streamData.data.data[0];
+  populateMembers(members: Member[], online: boolean) {
+    this._isMounted = true;
+    
+    members = this.sortMembers(members, online);
 
-          // Skip the rest of the loop if streamer isn't live.
-          if (streamData === undefined) {
-            console.log(`Skipping streamer: ${memberAlias}!!!!!!`);
-            members[i].stream.live = false;
-            members[i].api = {};
-            continue;
-          }
+    if (this._isMounted) {
+      console.log("Mounted!");
+      this.setState({ members, loading: false, refreshing: false });
+    }
+  }
 
-          // Get streamer info if available
-          let streamerData: any = await getStreamer(memberID);
-          const streamerResponse = streamerData.status; // 200
-          streamerData = streamerData.data.data[0];
-          
-          // Initialize object to merge with members.api.
-          let stream: Stream = {};
+  sortMembers(members: Member[], online: boolean) {
+    let liveMembers: Member[] = [];
 
-          // Set live stream data.
-          if (streamData !== undefined) {
-            stream.viewers = streamData.viewer_count;
-            stream.game = streamData.game_name;
-            stream.lastStream = streamData.started_at;
-            stream.title = streamData.title;
-            members[i].stream.live = true;
-          }
+    // Get only the live members and sort by descending view count.
+    if (online) {
+      liveMembers = members.filter((member: Member) => member.stream.live === true);
+      if (liveMembers.length > 1) mySort(liveMembers, "api", "viewers");
+    }
 
-          // Set profile URL.
-          if (streamerData !== undefined) {
-            stream.logo = streamData.profile_image_url;
-          }
-          
-          members[i].api = { ...members[i].api,  ...stream };
-          console.log(`Merged ${memberAlias}..........`);
-        } catch (error) {
-          console.error("error", error);
-        }
-      } else {
-        console.log("Skipping non-Twitch streamers...");
-      }
+    // Remove non-live members and sort by descending alias.
+    members = members.filter((member: Member) => member.stream.live === false);
+    members.sort((a, b) => (b.alias.toLowerCase() > a.alias.toLowerCase()) ? -1 : 1);
+
+    // Merge live and non-live members
+    if (online) {
+      members = [ ...liveMembers, ...members ];
     }
 
     return members;
-  }
-
-  async populateMembers() {
-    try {
-      this._isMounted = true;
-
-      // await pause(1.5);
-
-      // Get all members
-      // let members = await getMembers();
-
-      // Use API here to merge data into members
-      // members = await this.getAPI(members);
-      // console.log("members", members);
-
-      let { data: members }: any = await getMyAPI();
-
-      // Sort
-      // Get live members
-      let liveMembers = members.filter((member: any) => member.stream.live === true);
-      // Sort live members
-      mySort(liveMembers, "api", "viewers");
-      // Remove non-live members
-      members = members.filter((member: any) => member.stream.live === false);
-      // Sort non-live members by followers
-      mySort(members, "api", "followers");
-      // Merge live and non-live members
-      members = [ ...liveMembers, ...members ];
-
-      if (this._isMounted) {
-        console.log("Mounted!");
-        this.setState({ members, loading: false, refreshing: false });
-      }
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   render() { 

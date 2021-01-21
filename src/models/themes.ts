@@ -1,6 +1,10 @@
-import { Atheme } from '../types/Theme';
+interface Theme {
+  readonly label: string;
+  readonly classLabel: string;
+  readonly remark: string;
+}
 
-export const THEMES: Atheme[] = [
+export const themes: Theme[] = [
   {
     label: "Dark",
     classLabel: "theme-dark",

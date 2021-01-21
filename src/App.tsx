@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { THEMES } from './models/themes';
+import { themes } from './models/themes';
 import Masthead from './components/masthead';
 import MemberList from './components/memberList';
 import Footer from './components/footer';
@@ -7,22 +7,27 @@ import './App.css';
 
 function App() {
   // Get theme from local storage.
-  const theme: string | null | undefined = localStorage.getItem("theme");
+  const LSThemeID: string | null | undefined = localStorage.getItem("theme");
 
-  // If theme from local storage exists, set themeID state.
-  const initThemeID: number = (theme !== null) ? parseInt(theme) : 0;
-  const [themeID, setThemeID] = useState(initThemeID);
+  // Set themeID state.
+  const initialThemeID: number = (LSThemeID === null) ? 0 : parseInt(LSThemeID);
+  const [ themeID, setThemeID ] = useState(initialThemeID);
 
   useEffect(() => {
-    // Reset theme ID
+    // Reset theme ID to 0 if out of bounds
     if (themeID <= -1) return setThemeID(3);
     if (themeID >= 4) return setThemeID(0);
     
-    // Set the body HTML node class name.
-    let body: any = document.querySelector("body");
-    body.className = THEMES[themeID]?.classLabel;
+    // Set the HTML body node's class name.
+    let body: HTMLBodyElement | null = document.querySelector("body");
+    if (body !== null) {
+      body.className = themes[themeID]?.classLabel;
+    } else {
+      // Send message to notification area module.
+      console.error("Failed to find HTML body node.");
+    }
     
-    // Save themeID to local storage.
+    // Save user set themeID to local storage.
     localStorage.setItem("theme", themeID.toString());
   }, [themeID]);
 
