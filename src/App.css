@@ -160,15 +160,27 @@ body {
   max-width: 100%;
   height: 38px;
   color: var(--color-text-refresh);
-  font-size: 14px;
+  font-size: 0.85em;
 }
 
 .message {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; */
+
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   padding-left: 48px;
   margin-right: auto;
+  color: var(--color-text-refresh);
+  height: 18px;
+  font-weight: bold;
+}
+
+#notification-icon {
+  text-shadow: 1px 1px 0px #000000;
 }
 
 .refresh {
@@ -185,6 +197,7 @@ body {
 .refresh .refresh-label {
   padding-left: 8px;
   margin-top: 1px;
+  white-space: nowrap;
 }
 .refresh #loading-p {
   padding-left: 8px;

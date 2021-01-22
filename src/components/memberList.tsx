@@ -30,6 +30,11 @@ interface Member {
   links: any
 }
 
+interface Notification {
+  level?: string;
+  message?: string;
+}
+
 export interface MemberListProps {
 }
  
@@ -37,6 +42,7 @@ export interface MemberListState {
   loading: boolean,
   refreshing: boolean,
   members: Member[],
+  notification: Notification
 }
 
 class MemberList extends React.Component<MemberListProps, MemberListState> {
@@ -46,7 +52,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     this.state = {
       loading: true,
       refreshing: false,
-      members: []
+      members: [],
+      notification: {}
     };
 
     this.populateMembers = this.populateMembers.bind(this);
@@ -86,29 +93,28 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
   async getData() {
     try {
-      throw new Error("Manual throw");
-      
+      // throw new Error(); // Debug
       // Get members from node API.
       let { data: members } = await getMyAPI();
       this.populateMembers(members, true);
     } catch (error) {
       console.error("A network error has occurred. Falling back to offline (^_^) mode.");
-      // TODO: Send a message to a notification area.
+      const notification = { level: "high", message: "Network error. Try reloading."};
       
       // Get members from offline JSON.
       let members: Member[] = await getMembers();
-      this.populateMembers(members, false);
+      this.populateMembers(members, false, notification);
     }
   }
 
-  populateMembers(members: Member[], online: boolean) {
+  populateMembers(members: Member[], online: boolean, notification: Notification = {}) {
     this._isMounted = true;
     
     members = this.sortMembers(members, online);
 
     if (this._isMounted) {
       console.log("Mounted!");
-      this.setState({ members, loading: false, refreshing: false });
+      this.setState({ members, loading: false, refreshing: false, notification });
     }
   }
 
@@ -133,14 +139,44 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
     return members;
   }
 
+  renderNotification() {
+    const { level, message } = this.state.notification;
+
+    let iconClass = "";
+    let color = "";
+
+    if (level === "moderate") {
+      iconClass = "fas fa-exclamation-triangle";
+      color = "yellow";
+    }
+
+    if (level === "high") {
+      iconClass = "fas fa-exclamation-circle";
+      color = "red";
+    }
+
+    return (
+      <React.Fragment>
+        <i
+        style={{ color }}
+        id="notification-icon"
+        className={iconClass}
+        title={message}
+      ></i> {message}
+      </React.Fragment>
+    );
+  }
+
   render() { 
-    const { loading, refreshing, members } = this.state;
+    const { loading, refreshing, members, notification } = this.state;
 
     return (
       <div className="content">
         <div className="notification">
-          {/* <div className="message">Welcome!</div> */}
-          { (!loading && refreshing) && <Refresh refreshing={refreshing}/>}
+          <div className="message">
+            {notification.message && this.renderNotification()}
+          </div>
+          { (!loading && refreshing) && <Refresh refreshing={refreshing}/> }
         </div>
 
         <Loading loading={loading}>
