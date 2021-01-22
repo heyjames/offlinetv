@@ -264,6 +264,15 @@ body {
   opacity: 0.35;
   cursor: pointer;
 }
+.offline .uptime {
+  /* color: rgba(0, 0, 0, 0.3); */
+  opacity: 0.35;
+  color: var(--color-offline-name);
+}
+.offline:hover .uptime {
+  /* color: rgba(0, 0, 0, 0.8); */
+  opacity: 0.8;
+}
 .offline:hover .avatar,
 .offline:hover .name {
   opacity: 0.8;

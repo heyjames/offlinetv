@@ -1,14 +1,17 @@
 import moment from 'moment';
 
 export interface UptimeProps {
-  lastStream?: string
+  streamStartedAt?: string;
+  lastStreamedAt: string;
+  live: boolean;
 }
  
-const Uptime: React.SFC<UptimeProps> = ({ lastStream }) => {
+const Uptime: React.SFC<UptimeProps> = ({ streamStartedAt, lastStreamedAt, live }) => {
   let uptime = "";
+  lastStreamedAt = (lastStreamedAt) ? moment(lastStreamedAt).fromNow() : "";
 
-  if (lastStream !== undefined) {
-    const start = moment(lastStream);
+  if (streamStartedAt !== undefined) {
+    const start = moment(streamStartedAt);
     const now = moment();
     const hours = now.diff(start, "h");
     const minutes = now.diff(start, "m") % 60;
@@ -21,7 +24,7 @@ const Uptime: React.SFC<UptimeProps> = ({ lastStream }) => {
 
   return (
     <div className="uptime">
-      {uptime}
+      {(live) ? uptime : lastStreamedAt}
     </div>
   );
 }

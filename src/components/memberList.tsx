@@ -19,11 +19,12 @@ interface Member {
     url: string;
     live: boolean;
     avatar: string;
+    last_stream_date: string;
   },
   api: {
     viewers?: number;
     game?: string;
-    lastStream?: string;
+    stream_started_at?: string;
     title?: string;
     logo?: string;
   },
@@ -180,10 +181,10 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
         </div>
 
         <Loading loading={loading}>
-          {members.map((member: any, index) => {
+          {members.map((member: Member, index) => {
             const { stream, api } = member;
-            const { live } = stream;
-            const { title, lastStream } = api;
+            const { live, last_stream_date: lastStreamedAt } = stream;
+            const { title, stream_started_at: streamStartedAt } = api;
 
             return (
               <Channel key={index} member={member}>
@@ -214,7 +215,11 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                     <div className="view-count">
                       {live && (api.viewers && api.viewers.toLocaleString())}
                     </div>
-                    <Uptime lastStream={lastStream} />
+                    <Uptime
+                      streamStartedAt={streamStartedAt}
+                      lastStreamedAt={lastStreamedAt}
+                      live={live}
+                    />
                   </div>
                 </div>
               </Channel>
