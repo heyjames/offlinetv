@@ -2,20 +2,28 @@ import { themes } from '../models/themes';
 
 export interface FooterProps {
   themeID: number,
-  setThemeID: any
+  setThemeID: any,
+  setShowAboutMessage: any,
+  showAboutMessage: any
 }
 
-const Footer: React.SFC<FooterProps> = ({ themeID, setThemeID}) => {
+const Footer: React.SFC<FooterProps> = ({ themeID, setThemeID, showAboutMessage, setShowAboutMessage}) => {
 
-  const aboutTitle: string = `I made this to quickly find Offline TV and \
-related live streamers across platforms.`;
+//   const aboutTitle: string = `I made this to quickly find Offline TV and \
+// related live streamers across platforms.`;
 
   return (
     <div className="footer">
-      <span className="theme-label about" title={aboutTitle}>About</span>
+      <span
+        className="theme-label about button"
+        onClick={() => setShowAboutMessage(!showAboutMessage)}
+      >
+        About
+      </span>
+
       <span className="theme">
         <i
-          className="fas fa-caret-left theme-back"
+          className="fas fa-caret-left theme-back button"
           onClick={() => setThemeID(themeID - 1)}
         >
         </i>
@@ -28,7 +36,7 @@ related live streamers across platforms.`;
         </span>
         
         <i
-          className="fas fa-caret-right theme-forward"
+          className="fas fa-caret-right theme-forward button"
           onClick={() => setThemeID(themeID + 1)}
         >
         </i>

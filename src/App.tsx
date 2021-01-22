@@ -13,6 +13,7 @@ function App() {
   const initialThemeID: number = (LSThemeID === null) ? 0 : parseInt(LSThemeID);
   const [ themeID, setThemeID ] = useState(initialThemeID);
 
+  // Handle theme events.
   useEffect(() => {
     // Reset theme ID to 0 if out of bounds
     if (themeID <= -1) return setThemeID(3);
@@ -31,6 +32,24 @@ function App() {
     localStorage.setItem("theme", themeID.toString());
   }, [themeID]);
 
+  // Handle footer's about message.
+  let aboutMessageStr = `I made this to easily find Offline TV and associated \
+live streamers across platforms.`;
+  let [ showAboutMessage, setShowAboutMessage ] = useState(false);
+
+  useEffect(() => {
+    const node: any = document.getElementById("about-message-p");
+    if (node === null) throw new Error("Failed to get about-message HTML node.");
+    
+    node.style.display = (showAboutMessage === true) ? "flex" : "none";
+
+    window.scrollTo({
+      top: window.outerHeight + 500,
+      behavior: 'smooth'
+    });
+  });
+
+
   return (
     <React.Fragment>
       <div className="App">
@@ -41,7 +60,19 @@ function App() {
         </div>
 
         <div className="spacer"></div>
-        <Footer themeID={themeID} setThemeID={setThemeID} />
+
+        <div id="about-message-p">
+          <div id="about-message">
+            {aboutMessageStr}
+          </div>
+        </div>
+
+        <Footer
+          themeID={themeID}
+          setThemeID={setThemeID}
+          showAboutMessage={showAboutMessage}
+          setShowAboutMessage={setShowAboutMessage}
+        />
 
       </div>
     </React.Fragment>

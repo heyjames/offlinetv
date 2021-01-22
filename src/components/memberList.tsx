@@ -86,6 +86,8 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
 
   async getData() {
     try {
+      throw new Error("Manual throw");
+      
       // Get members from node API.
       let { data: members } = await getMyAPI();
       this.populateMembers(members, true);
