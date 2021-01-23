@@ -8,7 +8,7 @@ import Loading from './loading';
 import Avatar from './avatar';
 import Name from './name';
 import Channel from './channel';
-import Uptime from './uptime';
+import StreamTimeControl from './streamTimeControl';
 
 interface Member {
   alias: string;
@@ -215,7 +215,7 @@ class MemberList extends React.Component<MemberListProps, MemberListState> {
                     <div className="view-count">
                       {live && (api.viewers && api.viewers.toLocaleString())}
                     </div>
-                    <Uptime
+                    <StreamTimeControl
                       streamStartedAt={streamStartedAt}
                       lastStreamedAt={lastStreamedAt}
                       live={live}

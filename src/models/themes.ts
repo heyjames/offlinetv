@@ -1,4 +1,4 @@
-interface Theme {
+export interface Theme {
   readonly label: string;
   readonly classLabel: string;
   readonly remark: string;

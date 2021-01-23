@@ -1,6 +1,7 @@
-import { themes } from '../models/themes';
+import { themes, Theme } from '../models/themes';
 
 export interface FooterProps {
+  themes: Theme[],
   themeID: number,
   setThemeID: any,
   setShowAboutMessage: any,
@@ -24,7 +25,7 @@ const Footer: React.SFC<FooterProps> = ({ themeID, setThemeID, showAboutMessage,
       <span className="theme">
         <i
           className="fas fa-caret-left theme-back button"
-          onClick={() => setThemeID(themeID - 1)}
+          onClick={() => setThemeID((themeID - 1 + themes.length) % themes.length)}
         >
         </i>
 
@@ -37,7 +38,7 @@ const Footer: React.SFC<FooterProps> = ({ themeID, setThemeID, showAboutMessage,
         
         <i
           className="fas fa-caret-right theme-forward button"
-          onClick={() => setThemeID(themeID + 1)}
+          onClick={() => setThemeID((themeID + 1) % themes.length)}
         >
         </i>
       </span>
