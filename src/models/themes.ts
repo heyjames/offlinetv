@@ -11,6 +11,11 @@ export const themes: Theme[] = [
     remark: ""
   },
   {
+    label: "Darker",
+    classLabel: "theme-darker",
+    remark: ""
+  },
+  {
     label: "Light",
     classLabel: "theme-light",
     remark: ""
@@ -24,5 +29,5 @@ export const themes: Theme[] = [
     label: "Sykkuno",
     classLabel: "theme-light theme-sykkuno",
     remark: "Just for fun, guys"
-  },
+  }
 ];

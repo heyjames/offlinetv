@@ -56,6 +56,16 @@
   --color-text-about-message: rgba(255, 255, 255, 0.5);
 }
 
+.theme-darker {
+  --color-background-body: #111111 !important;
+  --color-background-channel: #202020 !important;
+  --color-background-channel-offline: #151515 !important;
+  --color-background-channel-online-hover: #2c2c2c !important;
+  --color-border-channel-online: #2c2c2c !important;
+  --color-border-channel-online-hover: #444444 !important;
+  --color-background-footer: #1b1b1b !important;
+}
+
 .theme-lilypichu {
   --color-background-body: #fdc5d2 !important;
 }
