@@ -7,25 +7,50 @@ export interface StreamTimeControlProps {
   live: boolean;
 }
  
-const StreamTimeControl: React.SFC<StreamTimeControlProps> = ({ streamStartedAt, lastStreamedAt, live }) => {
-  let uptime = "";
-  lastStreamedAt = (lastStreamedAt) ? moment(lastStreamedAt).fromNow() : "";
+const StreamTimeControl: React.SFC<StreamTimeControlProps> = ({
+  streamStartedAt,
+  lastStreamedAt,
+  live
+}) => {
+  const dateTimeFormat = "MMM DD, YYYY (h:mm A)";
+  let streamStartedAtLabel = "";
+  const lastStreamedAtLabel = (lastStreamedAt !== "")
+                            ? moment(lastStreamedAt).fromNow()
+                            : "";
+  const streamStartedAtTitle = `Stream start time: ${moment(streamStartedAt)
+    .format(dateTimeFormat)}`
+  const lastStreamedAtTitle = `Last seen streaming approx.: ${moment(lastStreamedAt)
+    .format(dateTimeFormat)}`;
 
+  // Format from ISO date to e.g. "1.2 hrs".
   if (streamStartedAt !== undefined) {
     const start = moment(streamStartedAt);
     const now = moment();
     const hours = now.diff(start, "h");
     const minutes = now.diff(start, "m") % 60;
-    let decimalHours = Math.round((minutes / 60) * 10) / 10;
-    uptime = `${hours + decimalHours} hrs`;
-
-    // console.log(hours);
-    // console.log(decimalHours);
+    const decimalHours = Math.round((minutes / 60) * 10) / 10;
+    streamStartedAtLabel = `${hours + decimalHours} hrs`;
   }
 
-  if (live === true) return <div className="uptime" title={"Uptime"}>{uptime}</div>;
+  if (live === true) {
+    return (
+      <div 
+        className="uptime" 
+        title={streamStartedAtTitle}
+      >
+        {streamStartedAtLabel}
+      </div>
+    );
+  }
 
-  return <div className="uptime" title={"Last recorded stream"}>{lastStreamedAt}</div>;
+  return (
+    <div 
+      className="uptime" 
+      title={lastStreamedAtTitle}
+    >
+      {lastStreamedAtLabel}
+    </div>
+  );
 }
  
 export default StreamTimeControl;
