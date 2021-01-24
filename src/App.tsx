@@ -54,8 +54,8 @@ function useTheme() {
   // Handle theme events.
   useEffect(() => {
     // Reset theme ID to 0 if out of bounds. Deprecated? Fallback.
-    if (themeID <= -1) return setThemeID(3);
-    if (themeID >= 4) return setThemeID(0);
+    // if (themeID <= -1) return setThemeID(3);
+    // if (themeID >= 4) return setThemeID(0);
     
     // Set the HTML body node's class name.
     let body: HTMLBodyElement | null = document.querySelector("body");
