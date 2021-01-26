@@ -58,12 +58,14 @@
 
 .theme-darker {
   --color-background-body: #111111 !important;
-  --color-background-channel: #202020 !important;
+  --color-background-channel: #272727 !important;
   --color-background-channel-offline: #151515 !important;
   --color-background-channel-online-hover: #2c2c2c !important;
   --color-border-channel-online: #2c2c2c !important;
   --color-border-channel-online-hover: #444444 !important;
   --color-background-footer: #1b1b1b !important;
+  --color-text-about-message: rgba(255, 255, 255, 0.5) !important;
+  --color-background-about-message: rgba(26, 26, 26, 0.5) !important;
 }
 
 .theme-lilypichu {
@@ -155,7 +157,7 @@ body {
 	color: #ffffff;
 	position: absolute;
 	margin-top: 30px;
-	transform: rotate(-10deg);
+	transform: rotate(-15deg);
 	margin-left: -58px;
 	text-shadow: 2px 2px 0px #0094ce;
   cursor: default;
