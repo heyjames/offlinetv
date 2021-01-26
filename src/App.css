@@ -62,7 +62,7 @@
   --color-background-channel-offline: #151515 !important;
   --color-background-channel-online-hover: #2c2c2c !important;
   --color-border-channel-online: #2c2c2c !important;
-  --color-border-channel-online-hover: #444444 !important;
+  --color-border-channel-online-hover: #555555 !important;
   --color-background-footer: #1b1b1b !important;
   --color-text-about-message: rgba(255, 255, 255, 0.5) !important;
   --color-background-about-message: rgba(26, 26, 26, 0.5) !important;
@@ -125,7 +125,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 202px);
 }
 
 .masthead {
@@ -257,6 +257,7 @@ body {
 
 .offline {
   background-color: var(--color-background-channel-offline);
+  border: 1px solid var(--color-border-avatar-inner-ring-hover);
 }
 .offline:hover .avatar img {
   border: 2px solid rgba(0, 0, 0, 0);
@@ -480,8 +481,8 @@ body {
   position: absolute;
   left: 8px;
   top: 8px;
-  width: 25px;
-  height: 25px;
+  width: 1.6em;
+  height: 1.6em;
   border-radius: 50%;
   box-shadow: 6px 3px 0px 0px var(--color-shadow-moon);
   z-index: -1;
@@ -530,7 +531,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  height: 200px;
+  height: 170px;
 }
 
 .footer {
