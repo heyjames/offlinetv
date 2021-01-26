@@ -6,7 +6,7 @@ export interface AvatarProps {
 }
  
 const Avatar: React.FC<AvatarProps> = ({ children, member }) => {
-  const { stream, api } = member;
+  const { stream } = member;
   const { live } = stream;
 
   if (live) {
