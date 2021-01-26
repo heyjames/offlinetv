@@ -5,7 +5,7 @@ export interface AvatarProps {
   member: any
 }
  
-const Avatar: React.SFC<AvatarProps> = ({ children, member }) => {
+const Avatar: React.FC<AvatarProps> = ({ children, member }) => {
   const { stream, api } = member;
   const { live } = stream;
 

@@ -3,7 +3,7 @@ export interface ChannelProps {
   member?: any
 }
  
-const Channel: React.SFC<ChannelProps> = ({ children, member }) => {
+const Channel: React.FC<ChannelProps> = ({ children, member }) => {
   const { stream } = member;
   const { live } = stream;
           

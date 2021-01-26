@@ -7,7 +7,7 @@ export interface StreamTimeControlProps {
   live: boolean;
 }
  
-const StreamTimeControl: React.SFC<StreamTimeControlProps> = ({
+const StreamTimeControl: React.FC<StreamTimeControlProps> = ({
   streamStartedAt,
   lastStreamedAt,
   live

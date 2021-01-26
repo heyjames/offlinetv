@@ -2,7 +2,7 @@ export interface NameProps {
   member: any
 }
  
-const Name: React.SFC<NameProps> = ({ member }) => {
+const Name: React.FC<NameProps> = ({ member }) => {
   const { stream } = member;
   const { live } = stream;
 
