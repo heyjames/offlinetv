@@ -14,10 +14,11 @@ interface Member {
   alias: string;
   name: string;
   stream: {
-    id: number;
+    id: string;
     label: string;
     url: string;
     live: boolean;
+    url_alt: string;
     avatar: string;
     last_stream_date: string;
   },
@@ -28,7 +29,7 @@ interface Member {
     title?: string;
     logo?: string;
   },
-  links: any
+  links: string[]
 }
 
 interface Notification {
@@ -169,7 +170,7 @@ function useMembers() {
       notification = { level: "high", message: "Network error. Try reloading."};
       
       // Get members from offline JSON.
-      let members: any = await getMembers(); // TODO: let members: any = await getMembers();
+      let members: any = await getMembers();
       members = sortMembers(members, false);
       setMembers(members);
     }
@@ -188,7 +189,7 @@ function useMembers() {
       await pause(2000);
       doSomething();
       console.log("Refreshed!");
-    }, 10000);
+    }, 60000);
 
     return function cleanup() {
       clearInterval(INTERVAL_ID);
