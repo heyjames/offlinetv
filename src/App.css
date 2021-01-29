@@ -116,7 +116,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: sans-serif, Arial, Helvetica;
-  user-select: none;
+  /* user-select: none; */
   padding: 0 4px;
 }
 
@@ -328,15 +328,15 @@ body {
 }
 
 .youtube {
-  box-shadow: 0 0 0 2px #ba0000;
+  box-shadow: 0 0 0 3px #ba0000;
 }
 
 .twitch {
-  box-shadow: 0 0 0 2px #9146ff;
+  box-shadow: 0 0 0 3px #9146ff;
 }
 
 .facebook {
-  box-shadow: 0 0 0 2px #1877f2;
+  box-shadow: 0 0 0 3px #1877f2;
 }
 
 .ng {
