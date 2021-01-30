@@ -69,10 +69,17 @@ function useTheme() {
   return { themeID, setThemeID };
 }
 
+// Handle footer's about message.
 function useAboutMessage() {
-  // Handle footer's about message.
+  let contact = "";
+  if (process.env.REACT_APP_CONTACT !== undefined) {
+    contact = "You can contact me at " + process.env.REACT_APP_CONTACT;
+  }
+
   let aboutMessageStr = `I made this to easily find Offline TV and associated \
-live streamers across platforms.`;
+live streamers. Ideally, it should include all members from all platforms, but \
+I'm having difficulty understanding Facebook's API (sorry DisguisedToast), so \
+only Twitch and YouTube are currently supported.${contact}`;
   let [ showAboutMessage, setShowAboutMessage ] = useState(false);
 
   useEffect(() => {

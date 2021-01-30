@@ -32,7 +32,7 @@
 .theme-dark {
   --color-background-body: #272727;
   --color-background-channel: #434343;
-  --color-background-channel-online-hover: #494949;
+  --color-background-channel-online-hover: #4e4e4e;
   --color-border-channel-online: #5f5f5f;
   --color-background-channel-offline: #2c2c2c;
   --color-name: #ededed;
@@ -51,7 +51,7 @@
   --color-text-shadow-footer: #000000;
   --color-text-uptime: rgba(255, 255, 255, 0.3);
   --color-offline-name: #ededed;
-  --color-border-channel-online-hover: #a9a9a9;
+  --color-border-channel-online-hover: #7c7c7c;
   --color-background-about-message: rgba(0, 0, 0, 0.15);
   --color-text-about-message: rgba(255, 255, 255, 0.5);
 }
@@ -362,6 +362,7 @@ body {
   flex-direction: row;
   align-self: flex-start;
   font-size: var(--size-text-game);
+  white-space: nowrap;
 }
 
 .details {

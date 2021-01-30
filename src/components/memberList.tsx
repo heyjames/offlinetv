@@ -211,25 +211,37 @@ function useMembers() {
 //   return refreshing;
 // }
 
-function sortMembers(members: Member[], online: boolean) {
-  let liveMembers: Member[] = [];
+function sortMembers(members: Member[], online: boolean): Member[] {
+  let isLive: Member[] = [];
+  let notLiveNoLastSeen: Member[] = [];
+  let notLivehasLastSeen: Member[] = [];
 
-  // Get only the live members and sort by descending view count.
+  // Get online members and sort by descending view count.
   if (online) {
-    liveMembers = members.filter((member: Member) => member.stream.live === true);
-    if (liveMembers.length > 1) mySort(liveMembers, "api", "viewers");
+    isLive = members.filter((member: Member) => member.stream.live === true);
+    if (isLive.length > 1) mySort(isLive, "api", "viewers");
   }
 
-  // Remove non-live members and sort by descending alias.
-  members = members.filter((member: Member) => member.stream.live === false);
-  members.sort((a, b) => (b.alias.toLowerCase() > a.alias.toLowerCase()) ? -1 : 1);
+  // Get offline members and sort by ascending alias.
+  notLiveNoLastSeen = members.filter((member: Member) => {
+    return member.stream.live === false && member.stream.last_stream_date === "";
+  });
+  notLiveNoLastSeen.sort((a, b) => {
+    return (a.alias.toLowerCase() > b.alias.toLowerCase()) ? 1 : -1;
+  });
 
-  // Merge live and non-live members
-  if (online) {
-    members = [...liveMembers, ...members];
-  }
-
-  return members;
+  // Get offline members with a "last seen" date and sort by ascending age.
+  notLivehasLastSeen = members.filter((member: Member) => {
+    return member.stream.live === false && member.stream.last_stream_date !== "";
+  });
+  notLivehasLastSeen.sort((a, b) => {
+    const compareA = new Date(a.stream.last_stream_date).getTime();
+    const compareB = new Date(b.stream.last_stream_date).getTime();
+    return (compareB < compareA) ? -1 : 1;
+  });
+  
+  
+  return [...isLive, ...notLivehasLastSeen, ...notLiveNoLastSeen];
 }
 
 export default MemberList;
