@@ -48,8 +48,36 @@ export interface MemberListState {
 }
 
 function MemberList() {
-  const loading = useLoading();
-  const { members, notification, refreshing } = useMembers();
+  const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState([]);
+  const [notification, setNotification] = useState({});
+  const [refreshing, setRefreshing] = useState(false);
+  
+  useEffect(() => {
+    (async () => {
+      let INTERVAL_ID: any = null;
+      clearInterval(INTERVAL_ID);
+
+      const members = await getAndSortMembers(setNotification);
+      setMembers(members);
+
+      setLoading(false);
+
+      INTERVAL_ID = setInterval(async () => {
+        setRefreshing(true);
+
+        await pause(3000);
+        const members = await getAndSortMembers(setNotification);
+        setMembers(members);
+
+        setRefreshing(false);
+      }, 60000);
+
+      return function cleanup() {
+        clearInterval(INTERVAL_ID);
+      }
+    })();
+  }, [setMembers, setRefreshing, setLoading]);
 
   return (
     <div className="content">
@@ -119,17 +147,19 @@ function MemberList() {
   );
 }
 
-function useLoading() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      // await pause(1200);
-      setLoading(false);
-    })();
-  }, [setLoading]);
-
-  return loading;
+async function getAndSortMembers(setNotification: any) {
+  try {
+    let { data: members } = await getMyAPI();
+    members = sortMembers(members, true);
+    setNotification({});
+    return members;
+  } catch (error) {
+    console.error("A network error has occurred. Falling back to offline (^_^) mode.");
+    let members: any = await getMembers();
+    members = sortMembers(members, false);
+    setNotification({ level: "high", message: "Network error. Try reloading."});
+    return members;
+  }
 }
 
 function renderNotification(notification: Notification) {
@@ -159,66 +189,6 @@ function renderNotification(notification: Notification) {
     </React.Fragment>
   );
 }
-
-function useMembers() {
-  const [members, setMembers] = useState([]);
-  const [notification, setNotification] = useState({});
-  const [refreshing, setRefreshing] = useState(false);
-
-  async function doSomething() {
-    let notification = {};
-    try {
-      // throw new Error(); // Debug
-      // Get members from node API.
-      let { data: members } = await getMyAPI();
-      // this.populateMembers(members, true);
-      members = sortMembers(members, true);
-      setMembers(members);
-    } catch (error) {
-      console.error("A network error has occurred. Falling back to offline (^_^) mode.");
-      notification = { level: "high", message: "Network error. Try reloading."};
-      
-      // Get members from offline JSON.
-      let members: any = await getMembers();
-      members = sortMembers(members, false);
-      setMembers(members);
-    }
-    setNotification(notification);
-    setRefreshing(false);
-  }
-
-  useEffect(() => {
-    let INTERVAL_ID: any = null;
-    clearInterval(INTERVAL_ID);
-    doSomething();
-
-    INTERVAL_ID = setInterval(async () => {
-      setRefreshing(true);
-      console.log("Pausing...");
-      await pause(2000);
-      doSomething();
-      console.log("Refreshed!");
-    }, 60000);
-
-    return function cleanup() {
-      clearInterval(INTERVAL_ID);
-    }
-  }, [setMembers, setNotification, setRefreshing]);
-
-
-
-  return {members, notification, refreshing};
-}
-
-// function useRefreshing() {
-//   const [refreshing, setRefreshing] = useState(false);
-
-//   useEffect(() => {
-//     setRefreshing(false);
-//   }, [setRefreshing]);
-
-//   return refreshing;
-// }
 
 function sortMembers(members: Member[], online: boolean): Member[] {
   let isLive: Member[] = [];
