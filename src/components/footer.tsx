@@ -8,11 +8,7 @@ export interface FooterProps {
   showAboutMessage: any
 }
 
-const Footer: React.SFC<FooterProps> = ({ themeID, setThemeID, showAboutMessage, setShowAboutMessage}) => {
-
-//   const aboutTitle: string = `I made this to quickly find Offline TV and \
-// related live streamers across platforms.`;
-
+const Footer: React.FC<FooterProps> = ({ themeID, setThemeID, showAboutMessage, setShowAboutMessage}) => {
   return (
     <div className="footer">
       <span

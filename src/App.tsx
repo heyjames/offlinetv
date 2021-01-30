@@ -89,27 +89,21 @@ function renderContactMessage() {
   
   return (
     <React.Fragment>
-      You can contact me on <a
+      You can message me on <a
         rel="noreferrer"
         style={{ color: "rgba(255, 255, 255, 0.8)" }}
         href={process.env.REACT_APP_CONTACT}
         target="_blank"
       >
         Reddit
-      </a> <i className="fas fa-external-link-alt fa-xs"></i>.
+      </a> <i className="fas fa-external-link-alt fa-xs">
+      </i> if you have any questions.
     </React.Fragment>
   )
 }
 
 // Handle footer's about message.
 function useAboutMessage() {
-  // let contact = "";
-  // let hyperlink = null;
-  // if (process.env.REACT_APP_CONTACT !== undefined) {
-  //   hyperlink = ` <a rel="noreferrer" href="${process.env.REACT_APP_CONTACT}" target="_blank">Reddit</a>`;
-  //   contact = ` You can contact me at${hyperlink}`;
-  // }
-
   let aboutMessageStr = `I made this to easily find Offline TV and associated \
 live streamers. Ideally, it should include all members from all platforms, but \
 I'm having difficulty understanding Facebook's API (sorry DisguisedToast), so \
