@@ -4,13 +4,14 @@ import '../App.css';
 function Masthead() {
   return (
     <div className="masthead">
+      <img src="./masthead.png" width="180" />
       <div className="moon"></div>
       <div className="cloud1"></div>
 
-      <h1>
-        <span className="header">OFFLINE TV</span>
-        <span className="subheader">& FRIENDS!</span>
-      </h1>
+      {/* <h1> */}
+        {/* <span className="header">OFFLINE TV</span>
+        <span className="subheader">& FRIENDS!</span> */}
+      {/* </h1> */}
 
       <span className="cloud2"></span>
     </div>

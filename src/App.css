@@ -132,8 +132,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 110px;
+  height: 120px;
   white-space: nowrap;
+}
+
+.masthead img {
+  padding-top: 20px;
 }
 
 .content {
@@ -418,9 +422,9 @@ body {
 	box-shadow: 4px 5px rgba(0, 0, 0, 0.2);
   border-radius: 100px;
   position: relative;
-  top: 58px;
-  left: -107px;
-  z-index: -1;
+  top: -36px;
+  left: -128px;
+  z-index: 1;
   margin: auto;
 }
 .cloud1::after,
@@ -451,8 +455,8 @@ body {
 	box-shadow: 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 100px;
   position: relative;
-  top: -90px;
-  right: -106px;
+  top: -85px;
+  right: -114px;
   z-index: 1;
   margin: auto;
 }
@@ -545,7 +549,7 @@ body {
   border-top: 1px solid var(--color-border-footer);
   margin-left: -4px;
   padding: 6px 4px;
-  font-size: 12px;
+  font-size: 0.8em;
   background-color: var(--color-background-footer);
   color: var(--color-text-footer);
 }
@@ -586,5 +590,12 @@ body {
 }
 
 #about-message {
+  font-size: 1em;
   padding: 20px;
+}
+
+.unsupported-platform-icon {
+  opacity: 0.5;
+  color: #ffff00;
+  text-shadow: 1px 1px 1px #000000;
 }

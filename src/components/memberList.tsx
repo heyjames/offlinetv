@@ -63,8 +63,9 @@ function MemberList() {
       <Loading loading={loading}>
         {members.map((member: Member, index) => {
           const { stream, api } = member;
-          const { live, last_stream_date: lastStreamedAt } = stream;
+          const { live, last_stream_date: lastStreamedAt, label } = stream;
           const { title, stream_started_at: streamStartedAt } = api;
+          const isFB = (label.toLowerCase() === "facebook");
 
           return (
             <Channel key={index} member={member}>
@@ -92,6 +93,14 @@ function MemberList() {
                 </div>
 
                 <div className="view-count-p">
+                  {
+                    isFB && (<div>
+                    <i 
+                      className="fas fa-exclamation-triangle unsupported-platform-icon"
+                      title="Facebook Gaming is unsupported"
+                    ></i>
+                    </div>)
+                  }
                   <div className="view-count">
                     {live && (api.viewers && api.viewers.toLocaleString())}
                   </div>
@@ -142,11 +151,11 @@ function renderNotification(notification: Notification) {
   return (
     <React.Fragment>
       <i
-      style={{ color }}
-      id="notification-icon"
-      className={iconClass}
-      title={message}
-    ></i> {message}
+        style={{ color }}
+        id="notification-icon"
+        className={iconClass}
+        title={message}
+      ></i> {message}
     </React.Fragment>
   );
 }
