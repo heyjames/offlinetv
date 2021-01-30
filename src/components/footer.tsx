@@ -1,4 +1,5 @@
-import { themes, Theme } from '../models/themes';
+import { themes } from '../models/themes';
+import { Theme } from '../types';
 
 export interface FooterProps {
   themes: Theme[],

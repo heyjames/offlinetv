@@ -1,8 +1,4 @@
-export interface Theme {
-  readonly label: string;
-  readonly classLabel: string;
-  readonly remark: string;
-}
+import { Theme } from '../types';
 
 export const themes: Theme[] = [
   {
