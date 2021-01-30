@@ -5,6 +5,21 @@ import MemberList from './components/memberList';
 import Footer from './components/footer';
 import './App.css';
 
+/*
+//////////////////////////////////////////
+// How to setup environmental variables //
+//////////////////////////////////////////
+// Windows Command Prompt/////////////////
+set REACT_APP_CONTACT_EMAIL=
+//////////////////////////////////////////
+// Windows Powershell/////////////////////
+$Env:REACT_APP_CONTACT_EMAIL=
+//////////////////////////////////////////
+// MacOS or Linux Terminal ///////////////
+export REACT_APP_CONTACT_EMAIL=
+//////////////////////////////////////////
+*/
+
 function App() {
   const { themeID, setThemeID } = useTheme();
   const {
@@ -26,7 +41,7 @@ function App() {
 
         <div id="about-message-p">
           <div id="about-message">
-            {aboutMessageStr}
+            {aboutMessageStr} {renderContactMessage()}
           </div>
         </div>
 
@@ -69,17 +84,36 @@ function useTheme() {
   return { themeID, setThemeID };
 }
 
+function renderContactMessage() {
+  if (process.env.REACT_APP_CONTACT === undefined) return null;
+  
+  return (
+    <React.Fragment>
+      You can contact me on <a
+        rel="noreferrer"
+        style={{ color: "rgba(255, 255, 255, 0.8)" }}
+        href={process.env.REACT_APP_CONTACT}
+        target="_blank"
+      >
+        Reddit
+      </a> <i className="fas fa-external-link-alt fa-xs"></i>.
+    </React.Fragment>
+  )
+}
+
 // Handle footer's about message.
 function useAboutMessage() {
-  let contact = "";
-  if (process.env.REACT_APP_CONTACT !== undefined) {
-    contact = "You can contact me at " + process.env.REACT_APP_CONTACT;
-  }
+  // let contact = "";
+  // let hyperlink = null;
+  // if (process.env.REACT_APP_CONTACT !== undefined) {
+  //   hyperlink = ` <a rel="noreferrer" href="${process.env.REACT_APP_CONTACT}" target="_blank">Reddit</a>`;
+  //   contact = ` You can contact me at${hyperlink}`;
+  // }
 
   let aboutMessageStr = `I made this to easily find Offline TV and associated \
 live streamers. Ideally, it should include all members from all platforms, but \
 I'm having difficulty understanding Facebook's API (sorry DisguisedToast), so \
-only Twitch and YouTube are currently supported.${contact}`;
+only Twitch and YouTube are currently supported.`;
   let [ showAboutMessage, setShowAboutMessage ] = useState(false);
 
   useEffect(() => {
