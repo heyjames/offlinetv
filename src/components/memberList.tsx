@@ -121,6 +121,12 @@ function MemberList() {
           );
         })}
       </Loading>
+
+      <div className="notification">
+        <div className="message-right" title={`${members.length} members`}>
+          <i className="fas fa-users"></i>&nbsp; {members.length}
+        </div>
+      </div>
     </div>
   );
 }
@@ -137,7 +143,7 @@ async function getAndSortMembers(setNotification: React.Dispatch<React.SetStateA
     let members: any = await getMembersOffline();
     members = sortMembers(members, false);
     setNotification({ level: "high", message: "Network error. Try reloading."});
-    
+
     return members;
   }
 }

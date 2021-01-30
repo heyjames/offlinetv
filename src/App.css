@@ -195,6 +195,17 @@ body {
   font-weight: bold;
 }
 
+.message-right {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 24px;
+  margin-left: auto;
+  color: var(--color-text-refresh);
+  height: 18px;
+  font-weight: bold;
+}
+
 #notification-icon {
   text-shadow: 1px 1px 0px #000000;
 }
