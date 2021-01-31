@@ -120,13 +120,13 @@ function MemberList() {
             </Channel>
           );
         })}
-      </Loading>
 
-      <div className="notification">
-        <div className="message-right" title={`${members.length} members`}>
-          <i className="fas fa-users"></i>&nbsp; {members.length}
+        <div className="notification">
+          <div className="message-right" title={`${members.length} members`}>
+            <i className="fas fa-users"></i>&nbsp; {members.length}
+          </div>
         </div>
-      </div>
+      </Loading>
     </div>
   );
 }
