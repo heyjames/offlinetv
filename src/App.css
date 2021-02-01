@@ -23,7 +23,7 @@
   --color-border-channel-online-hover: #a9a9a9;
 
   --size-text-name-online: 0.95em;
-  --size-text-game: 0.85em;
+  --size-text-game: 0.75em;
   --size-text-stream-title: 0.9em;
   --size-text-view-count: 0.95em;
   --size-text-uptime: 0.75em;
@@ -70,6 +70,7 @@
 
 .theme-lilypichu {
   --color-background-body: #fdc5d2 !important;
+  --color-game: #ffe5e5 !important;
 }
 
 .theme-sykkuno {

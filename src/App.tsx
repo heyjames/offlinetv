@@ -10,23 +10,18 @@ import './App.css';
 // How to setup environmental variables //
 //////////////////////////////////////////
 // Windows Command Prompt/////////////////
-set REACT_APP_CONTACT_EMAIL=
+set REACT_APP_CONTACT=
 //////////////////////////////////////////
 // Windows Powershell/////////////////////
-$Env:REACT_APP_CONTACT_EMAIL=
+$Env:REACT_APP_CONTACT=
 //////////////////////////////////////////
 // MacOS or Linux Terminal ///////////////
-export REACT_APP_CONTACT_EMAIL=
+export REACT_APP_CONTACT=
 //////////////////////////////////////////
 */
 
 function App() {
   const { themeID, setThemeID } = useTheme();
-  const {
-    aboutMessageStr,
-    showAboutMessage,
-    setShowAboutMessage
-  } = useAboutMessage();
 
   return (
     <React.Fragment>
@@ -39,18 +34,10 @@ function App() {
 
         <div className="spacer"></div>
 
-        <div id="about-message-p">
-          <div id="about-message">
-            {aboutMessageStr} {renderContactMessage()}
-          </div>
-        </div>
-
         <Footer
           themes={themes}
           themeID={themeID}
           setThemeID={setThemeID}
-          showAboutMessage={showAboutMessage}
-          setShowAboutMessage={setShowAboutMessage}
         />
 
       </div>
@@ -82,47 +69,6 @@ function useTheme() {
   });
 
   return { themeID, setThemeID };
-}
-
-function renderContactMessage() {
-  if (process.env.REACT_APP_CONTACT === undefined) return null;
-  
-  return (
-    <React.Fragment>
-      You can message me on <a
-        rel="noreferrer"
-        style={{ color: "rgba(255, 255, 255, 0.8)" }}
-        href={process.env.REACT_APP_CONTACT}
-        target="_blank"
-      >
-        Reddit
-      </a> <i className="fas fa-external-link-alt fa-xs">
-      </i> if you have any questions.
-    </React.Fragment>
-  )
-}
-
-// Handle footer's about message.
-function useAboutMessage() {
-  let aboutMessageStr = `I made this to easily find Offline TV and associated \
-live streamers. Ideally, it should include all members from all platforms, but \
-I'm having difficulty understanding Facebook's API (sorry DisguisedToast), so \
-only Twitch and YouTube are currently supported.`;
-  let [ showAboutMessage, setShowAboutMessage ] = useState(false);
-
-  useEffect(() => {
-    const node: any = document.getElementById("about-message-p");
-    if (node === null) throw new Error("Failed to get about-message HTML node.");
-    
-    node.style.display = (showAboutMessage === true) ? "flex" : "none";
-
-    window.scrollTo({
-      top: window.outerHeight + 500,
-      behavior: 'smooth'
-    });
-  });
-
-  return { aboutMessageStr, showAboutMessage, setShowAboutMessage };
 }
  
 export default App;
