@@ -148,7 +148,7 @@ async function getAndSortMembers(
     
     return members;
   } catch (error) {
-    console.error("A network error has occurred. Falling back to offline mode.", error);
+    console.error("A network error has occurred. Falling back to offline mode.");
     let { data: members }: any = await getMembersOffline();
     members = sortMembers(members, false);
     setNotification({ level: "high", message: "Network error. Try reloading."});
