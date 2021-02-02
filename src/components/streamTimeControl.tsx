@@ -19,7 +19,7 @@ const StreamTimeControl: React.FC<StreamTimeControlProps> = ({
                             : "";
   const streamStartedAtTitle = `Stream start time: ${moment(streamStartedAt)
     .format(dateTimeFormat)}`
-  const lastStreamedAtTitle = `Last seen streaming approx.: ${moment(lastStreamedAt)
+  const lastStreamedAtTitle = `Last seen streaming at approx.: ${moment(lastStreamedAt)
     .format(dateTimeFormat)}`;
 
   // Format from ISO date to e.g. "1.2 hrs".

@@ -192,7 +192,7 @@ body {
   padding-left: 48px;
   margin-right: auto;
   color: var(--color-text-refresh);
-  height: 18px;
+  height: 16px;
   font-weight: bold;
 }
 
@@ -200,7 +200,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding-right: 24px;
+  padding-right: 21px;
   margin-left: auto;
   color: var(--color-text-refresh);
   height: 18px;
@@ -223,7 +223,6 @@ body {
   padding-right: 20px;
 }
 .refresh .refresh-label {
-  padding-left: 8px;
   margin-top: 1px;
   white-space: nowrap;
 }

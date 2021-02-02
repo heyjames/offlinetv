@@ -89,7 +89,7 @@ function renderContactMessage() {
       >
         Reddit
       </a> <i className="fas fa-external-link-alt fa-xs">
-      </i> if you have any questions or to let me know if you find this site useful.
+      </i>.
     </React.Fragment>
   )
 }
