@@ -1,8 +1,9 @@
 import members from '../db/members.json'
 import axios from 'axios';
 
-export function getMembers() {
-  return axios.get("http://localhost:3001/api/members");
+export async function getMembers() {
+  const { data: result } = await axios.get("http://localhost:3001/api/members");
+  return result;
 }
 
 export function getMembersOffline() {

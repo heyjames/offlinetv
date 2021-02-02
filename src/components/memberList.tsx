@@ -26,7 +26,7 @@ function MemberList() {
   
   useEffect(() => {
     (async () => {
-      const showRefreshTime = 5000;
+      const showRefreshTime = 4500;
       const intervalTime = 60000;
 
       // Initialize interval
@@ -103,7 +103,7 @@ function MemberList() {
                     </React.Fragment>
                     ) : (
                     <React.Fragment>
-                      <div className="view-count">
+                      <div className="view-count" title="View Count">
                         {live && (api.viewers && api.viewers.toLocaleString())}
                       </div>
                       <StreamTimeControl
@@ -131,21 +131,54 @@ function MemberList() {
   );
 }
 
-async function getAndSortMembers(setNotification: React.Dispatch<React.SetStateAction<{}>>) {
+async function getAndSortMembers(
+  setNotification: React.Dispatch<React.SetStateAction<{}>>
+  ) {
   try {
-    let { data: members } = await getMembers();
+    let { data: members, errors } = await getMembers();
     members = sortMembers(members, true);
-    setNotification({});
 
+    // TODO: Convert to array and use a looping function.
+    if (errors.length === 0) {
+      setNotification({});
+    } else {
+      const errorMessage = handleErrorNotificationMessage(errors);
+      setNotification({ level: "moderate", message: errorMessage});
+    }
+    
     return members;
   } catch (error) {
-    console.error("A network error has occurred. Falling back to offline (^_^) mode.");
-    let members: any = await getMembersOffline();
+    console.error("A network error has occurred. Falling back to offline mode.", error);
+    let { data: members }: any = await getMembersOffline();
     members = sortMembers(members, false);
     setNotification({ level: "high", message: "Network error. Try reloading."});
 
     return members;
   }
+}
+
+function handleErrorNotificationMessage(errors: string[]): string {
+  let errorMessage = "";
+  let platformErrors = [];
+  let platformErrorsMessage = "";
+
+  errors.includes("twitch") && platformErrors.push("Twitch");
+  errors.includes("youtube") && platformErrors.push("YouTube");
+  errors.includes("facebook") && platformErrors.push("Facebook");
+
+  if (platformErrors.length > 0) {
+    if (platformErrors.length === 1) {
+      platformErrorsMessage = platformErrors[0];
+    }
+
+    if (platformErrors.length > 1) {
+      platformErrorsMessage = platformErrors.join(", ");
+    }
+
+    errorMessage = `Failed to update ${platformErrorsMessage} results`;
+  }
+
+  return errorMessage.trim();
 }
 
 export default MemberList;
