@@ -56,9 +56,9 @@ const Footer: React.FC<FooterProps> = ({ themeID, setThemeID }) => {
 // Handle footer's about message.
 function useAboutMessage() {
   let aboutMessageStr = `I made this to easily find Offline TV and associated \
-live streamers. Ideally, it should include all members from all platforms, but \
-I'm having difficulty understanding Facebook's API (sorry DisguisedToast), so \
-only Twitch and YouTube are currently supported.`;
+live streamers. Ideally, it should check if all streamers are live on all \
+platforms, but I'm having difficulty understanding Facebook's API (sorry \
+DisguisedToast), so only Twitch and YouTube are currently supported.`;
   let [ showAboutMessage, setShowAboutMessage ] = useState(false);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function renderContactMessage() {
       >
         Reddit
       </a> <i className="fas fa-external-link-alt fa-xs">
-      </i>.
+      </i> if you found this website helpful.
     </React.Fragment>
   )
 }

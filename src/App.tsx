@@ -11,12 +11,18 @@ import './App.css';
 //////////////////////////////////////////
 // Windows Command Prompt/////////////////
 set REACT_APP_CONTACT=
+set REACT_APP_API_URL=
+set NODE_ENV=<development|production>
 //////////////////////////////////////////
 // Windows Powershell/////////////////////
 $Env:REACT_APP_CONTACT=
+$Env:REACT_APP_API_URL=
+$Env:NODE_ENV=<development|production>
 //////////////////////////////////////////
 // MacOS or Linux Terminal ///////////////
 export REACT_APP_CONTACT=
+export REACT_APP_API_URL=
+export NODE_ENV=<development|production>
 //////////////////////////////////////////
 */
 
