@@ -1,6 +1,9 @@
 {
   "name": "offlinetv",
   "version": "0.1.0",
+  "engines": {
+    "node": "15.5.1"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
