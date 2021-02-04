@@ -66,11 +66,13 @@ DisguisedToast), so only Twitch and YouTube are currently supported.`;
     if (node === null) throw new Error("Failed to get about-message HTML node.");
     
     node.style.display = (showAboutMessage === true) ? "flex" : "none";
-
-    window.scrollTo({
-      top: window.outerHeight + 500,
-      behavior: 'smooth'
-    });
+    
+    if (showAboutMessage === true) {
+      window.scrollTo({
+        top: window.outerHeight + document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   });
 
   return { aboutMessageStr, showAboutMessage, setShowAboutMessage };
