@@ -4,6 +4,7 @@ import Masthead from './components/masthead';
 import MemberList from './components/memberList';
 import Footer from './components/footer';
 import './App.css';
+// import { pause } from './utils';
 
 /*
 //////////////////////////////////////////
@@ -28,26 +29,38 @@ export NODE_ENV=<development|production>
 
 function App() {
   const { themeID, setThemeID } = useTheme();
+  const [ isWWW ] = useState(window.location.host.startsWith("www"));
+  
+  useEffect(() => {
+    (async () => {
+      if (isWWW === false) {
+        // await pause(2000);
+        const location: any = window.location.protocol + "//www."
+          + window.location.host + window.location.pathname;
+        window.location = location;
+      }
+    })();
+  });
 
   return (
-    <React.Fragment>
-      <div className="App">
+    (!isWWW)
+      ? (<React.Fragment></React.Fragment>)
+      : (<div className="App">
 
-        <div className="main">
-          <Masthead />
-          <MemberList />
-        </div>
+          <div className="main">
+            <Masthead />
+            <MemberList />
+          </div>
 
-        <div className="spacer"></div>
+          <div className="spacer"></div>
 
-        <Footer
-          themes={themes}
-          themeID={themeID}
-          setThemeID={setThemeID}
-        />
+          <Footer
+            themes={themes}
+            themeID={themeID}
+            setThemeID={setThemeID}
+          />
 
-      </div>
-    </React.Fragment>
+        </div>)
   );
 }
 
