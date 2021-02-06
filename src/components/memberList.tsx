@@ -121,11 +121,11 @@ function MemberList() {
           );
         })}
 
-        <div className="notification">
+        {/* <div className="notification">
           <div className="message-right" title={`${members.length} streamers`}>
             <i className="fas fa-users"></i>&nbsp; {members.length}
           </div>
-        </div>
+        </div> */}
       </Loading>
     </div>
   );
