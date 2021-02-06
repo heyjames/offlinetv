@@ -3,5 +3,13 @@
   "routes": {
     "/**": "index.html"
   },
-  "https_only": true
+  "https_only": true,
+  "headers": { 
+    "/assets/**": {
+      "Cache-Control": "public, max-age=512000"
+    },
+    "/**": { 
+      "Cache-Control": "no-store, no-cache" 
+    }
+}
 }
