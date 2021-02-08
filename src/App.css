@@ -240,6 +240,7 @@ body {
   height: 44px;
   margin-bottom: 6px;
   text-decoration: none;
+  outline: 0;
 }
 .channel:last-child {
   margin-bottom: 0px;

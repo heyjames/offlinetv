@@ -43,14 +43,16 @@ const StreamTimeControl: React.FC<StreamTimeControlProps> = ({
     );
   }
 
-  return (
-    <div 
-      className="uptime" 
-      title={lastStreamedAtTitle}
-    >
-      {lastStreamedAtLabel}
-    </div>
-  );
+  return <div className="uptime"></div>;
+
+  // return (
+  //   <div 
+  //     className="uptime" 
+  //     title={lastStreamedAtTitle}
+  //   >
+  //     {lastStreamedAtLabel}
+  //   </div>
+  // );
 }
  
 export default StreamTimeControl;
