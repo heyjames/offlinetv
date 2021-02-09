@@ -43,8 +43,6 @@ const StreamTimeControl: React.FC<StreamTimeControlProps> = ({
     );
   }
 
-  // return <div className="uptime"></div>;
-
   return (
     <div 
       className="uptime" 
