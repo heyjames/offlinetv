@@ -66,7 +66,8 @@ function MemberList() {
           const { live, last_stream_date: lastStreamedAt, label } = stream;
           const { title, stream_started_at: streamStartedAt } = api;
           const isFB = (label.toLowerCase() === "facebook");
-          console.log(`${member.alias} ${lastStreamedAt}`);
+          console.log("alias", member.alias);
+          console.log("lsa", lastStreamedAt);
 
           return (
             <Channel key={index} member={member}>
