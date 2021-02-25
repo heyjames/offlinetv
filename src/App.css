@@ -397,21 +397,11 @@ body {
   overflow: hidden;
   font-size: var(--size-text-stream-title);
   color: var(--color-stream-title);
-  filter: grayscale(100%);
 }
 
-@media (max-width: 350px) {
+@media (max-width: 380px) {
   .stream-title {
     visibility: hidden;
-  }
-  
-  .stream-title span {
-    padding-left: 12px;
-  }
-  
-  .stream-title span:before {
-    visibility: visible;
-    content: "...";
   }
 }
 
