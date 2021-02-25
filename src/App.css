@@ -282,10 +282,11 @@ body {
 /* .offline .avatar img {
   filter: grayscale(100%);
 } */
-.offline .name {
+.offline .name a {
   color: var(--color-offline-name);
   cursor: pointer;
   opacity: 0.35;
+  text-decoration: none;
 }
 .offline .game {
   color: var(--color-offline-game);
@@ -304,7 +305,7 @@ body {
   opacity: 0.8;
 }
 .offline:hover .avatar,
-.offline:hover .name {
+.offline:hover .name a {
   opacity: 0.8;
 }
 
@@ -372,7 +373,6 @@ body {
 
 .name {
   flex: 0 0 120px;
-  text-decoration: none;
   text-align: left;
   outline: 0;
   font-size: var(--size-text-name-online);
@@ -384,19 +384,18 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  flex: 1 0 120px;
   font-size: var(--size-text-game);
   padding-left: 10px;
 }
 
 .stream-title {
-  flex: 1;
   min-width: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size: var(--size-text-stream-title);
   color: var(--color-stream-title);
+  filter: grayscale(100%);
 }
 
 @media (max-width: 380px) {
@@ -406,18 +405,21 @@ body {
 }
 
 .view-count {
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   text-align: right;
   font-size: var(--size-text-view-count);
   color: var(--color-view-count);
 }
 
-.uptime {
+.details-spacer {
   flex: 1;
+}
+
+.uptime {
   white-space: nowrap;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   text-align: right;
   font-size: var(--size-text-uptime);
   color: var(--color-text-uptime);

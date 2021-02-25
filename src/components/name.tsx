@@ -15,9 +15,11 @@ const Name: React.FC<NameProps> = ({ member }) => {
   }
   
   return (
-    <a className="name" rel="noreferrer" href={stream.url} target="_blank">
-      {member.alias}
-    </a>
+    <div className="name">
+      <a rel="noreferrer" href={stream.url} target="_blank">
+        {member.alias}
+      </a>
+    </div>
   );
 }
  

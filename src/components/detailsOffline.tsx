@@ -18,6 +18,8 @@ const DetailsOffline: React.FC<DetailsOfflineProps> = ({ member }) => {
     <div className="details">
       <div className="details-row">
         <Name member={member} />
+
+        <div className="details-spacer"></div>
         
         {isFB
           ? <UnsupportedIcon platformLabel="Facebook Gaming" />

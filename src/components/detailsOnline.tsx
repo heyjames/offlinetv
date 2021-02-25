@@ -21,6 +21,8 @@ const DetailsOnline: React.FC<DetailsOnlineProps> = ({ member }) => {
           {live && title}
         </div>
 
+        <div className="details-spacer"></div>
+
         <div className="view-count" title="View Count">
           {live && (api.viewers && api.viewers.toLocaleString())}
         </div>
@@ -30,6 +32,8 @@ const DetailsOnline: React.FC<DetailsOnlineProps> = ({ member }) => {
         <div className="game" title={api.game}>
           {live && api.game}
         </div>
+
+        <div className="details-spacer"></div>
         
         <StreamTimeControl
           streamStartedAt={streamStartedAt}
