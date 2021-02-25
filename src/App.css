@@ -12,7 +12,9 @@
   --color-border-loading-large-slice: #4b4b4b;
   --color-border-footer: #434343;
   --color-text-footer: #a7a7a7;
+  --color-text-masthead-sm: #ffffff;
   --color-background-footer: #2c2c2c;
+  --color-background-masthead-sm: rgba(255, 255, 255, 0.15);
   --color-shadow-moon: #383b4b;
   --color-border-avatar-inner-ring: rgba(0, 0, 0, 0);
   --color-border-avatar-inner-ring-hover: rgba(0, 0, 0, 0);
@@ -137,6 +139,43 @@ body {
   white-space: nowrap;
 }
 
+.masthead-sm-p {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border-footer);
+  padding-left: 8px;
+  font-size: 0.8em;
+  background-color: var(--color-background-masthead-sm);
+  color: var(--color-text-masthead-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  display: none;
+}
+
+.favicon-p img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 1px 1px 1px #000000;
+}
+
+.masthead-sm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 12px 8px 12px 2px;
+}
+
+.site-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 8px;
+  text-shadow: 1px 1px 0px #000000;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
 .masthead img {
   padding-top: 20px;
 }
@@ -144,7 +183,7 @@ body {
 .content {
   width: 680px;
   max-width: 100%;
-  min-width: 280px;
+  min-width: 270px;
 }
 
 .header {
@@ -176,7 +215,7 @@ body {
   align-items: center;
   width: 680px;
   max-width: 100%;
-  height: 38px;
+  height: 30px;
   color: var(--color-text-refresh);
   font-size: 0.85em;
 }
@@ -401,6 +440,26 @@ body {
 @media (max-width: 380px) {
   .stream-title {
     visibility: hidden;
+  }
+  
+  .moon,
+  .cloud1,
+  .cloud2  {
+    display: none;
+  }
+
+  .masthead {
+    display: none;
+    height: 30%;
+  }
+
+  .masthead img {
+    padding-top: 8px;
+    width: 30%;
+  }
+  
+  .masthead-sm-p {
+    display: block;
   }
 }
 
