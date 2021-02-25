@@ -18,7 +18,7 @@ const DetailsOnline: React.FC<DetailsOnlineProps> = ({ member }) => {
         <Name member={member} />
 
         <div className="stream-title" title={title}>
-          {live && title}
+          <span>{live && title}</span>
         </div>
 
         <div className="view-count" title="View Count">
