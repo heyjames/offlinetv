@@ -144,6 +144,7 @@ body {
 .content {
   width: 680px;
   max-width: 100%;
+  min-width: 280px;
 }
 
 .header {
@@ -396,6 +397,12 @@ body {
   overflow: hidden;
   font-size: var(--size-text-stream-title);
   color: var(--color-stream-title);
+}
+
+@media (max-width: 380px) {
+  .stream-title {
+    visibility: hidden;
+  }
 }
 
 .view-count {
