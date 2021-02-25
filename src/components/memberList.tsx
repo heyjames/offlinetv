@@ -5,10 +5,9 @@ import Refresh from './refresh';
 import Loading from './loading';
 // import _ from 'lodash';
 import Avatar from './avatar';
-import Name from './name';
 import Channel from './channel';
 import NotificationMessage from './NotificationMessage';
-import StreamTimeControl from './streamTimeControl';
+import Details from './details';
 import { Member, Notification } from '../types';
  
 export interface MemberListState {
@@ -57,20 +56,18 @@ function MemberList() {
     <div className="content">
       <div className="notification">
         <NotificationMessage notification={notification} />
+
         { (!loading && refreshing) && <Refresh refreshing={refreshing}/> }
       </div>
 
       <Loading loading={loading}>
         {members.map((member: Member, index) => {
           const { stream, api } = member;
-          const { live, last_stream_date: lastStreamedAt, label } = stream;
-          const { title, stream_started_at: streamStartedAt } = api;
-          const isFB = (label.toLowerCase() === "facebook");
+          const { live } = stream;
 
           return (
             <Channel key={index} member={member}>
               <Avatar member={member}>
-                {/* <div className="avatar-ring"></div> */}
                 <img
                   className={stream.label.toLowerCase()}
                   src={api.logo || "/avatars/" + stream.avatar}
@@ -78,62 +75,17 @@ function MemberList() {
                 />
               </Avatar>
             
-              <div className="details">
-                <div className="ng">
-                  <Name member={member} />
-                  <div className="game">
-                    {live && api.game}
-                  </div>
-                </div>
-                
-                <div className="stream-title-p">
-                  <div className="stream-title" title={title}>
-                    {live && title}
-                  </div>
-                </div>
-
-                <div className="view-count-p">
-                  {isFB ? (
-                    <React.Fragment>
-                      <i 
-                        className="fas fa-exclamation-triangle unsupported-platform-icon"
-                        title="Facebook Gaming is unsupported"
-                      >
-                      </i>
-                    </React.Fragment>
-                    ) : (
-                    <React.Fragment>
-                      <div className="view-count" title="View Count">
-                        {live && (api.viewers && api.viewers.toLocaleString())}
-                      </div>
-                      <StreamTimeControl
-                        streamStartedAt={streamStartedAt}
-                        lastStreamedAt={lastStreamedAt}
-                        live={live}
-                      />
-                    </React.Fragment>
-                    )
-                  }
-                </div>
-
-              </div>
+              <Details live={live} member={member} />
+              
             </Channel>
           );
         })}
-
-        {/* <div className="notification">
-          <div className="message-right" title={`${members.length} streamers`}>
-            <i className="fas fa-users"></i>&nbsp; {members.length}
-          </div>
-        </div> */}
       </Loading>
     </div>
   );
 }
 
-async function getAndSortMembers(
-  setNotification: React.Dispatch<React.SetStateAction<{}>>
-  ) {
+async function getAndSortMembers(setNotification: React.Dispatch<React.SetStateAction<{}>>) {
   try {
     let { data: members, errors } = await getMembers();
     members = sortMembers(members, true);

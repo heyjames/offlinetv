@@ -355,76 +355,65 @@ body {
   box-shadow: 0 0 0 3px #1877f2;
 }
 
-.ng {
+.details {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding-left: 8px;
-  min-width: 120px;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  min-width: 0px;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .name {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  flex: 0 0 120px;
   text-decoration: none;
+  text-align: left;
   outline: 0;
   font-size: var(--size-text-name-online);
+  padding-left: 10px;
 }
 
 .game {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  font-size: var(--size-text-game);
+  min-width: 10px;
+  text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.details {
-  flex: 1 1;
-  display: flex;
-  min-width: 0;
-}
-
-.stream-title-p {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  min-width: 0;
-  filter: grayscale(100%);
+  overflow: hidden;
+  flex: 1 0 120px;
+  font-size: var(--size-text-game);
+  padding-left: 10px;
 }
 
 .stream-title {
+  flex: 1;
+  min-width: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size: var(--size-text-stream-title);
-  max-width: 100%;
   color: var(--color-stream-title);
 }
 
-.view-count-p {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-end;
-  margin-left: auto;
-  padding-left: 14px;
-  padding-right: 20px;
-  max-width: 100%;
-  white-space: nowrap;
-}
-
 .view-count {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: right;
   font-size: var(--size-text-view-count);
   color: var(--color-view-count);
 }
 
 .uptime {
+  flex: 1;
+  white-space: nowrap;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: right;
   font-size: var(--size-text-uptime);
   color: var(--color-text-uptime);
-  white-space: nowrap;
 }
 
 .cloud1 {
