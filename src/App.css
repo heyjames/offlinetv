@@ -163,7 +163,7 @@ body {
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  padding: 12px 8px 12px 2px;
+  padding: 10px 8px 10px 2px;
 }
 
 .site-name {
@@ -437,7 +437,7 @@ body {
   filter: grayscale(100%);
 }
 
-@media (max-width: 380px) {
+@media (max-width: 370px) {
   .stream-title {
     visibility: hidden;
   }
