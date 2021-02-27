@@ -11,6 +11,7 @@ const DetailsOnline: React.FC<DetailsOnlineProps> = ({ member }) => {
   const { stream, api } = member;
   const { live, last_stream_date: lastStreamedAt } = stream;
   const { title, stream_started_at: streamStartedAt } = api;
+  const viewers = api.viewers ? api.viewers.toLocaleString() : undefined;
 
   return (
     <div className="details">
@@ -23,7 +24,7 @@ const DetailsOnline: React.FC<DetailsOnlineProps> = ({ member }) => {
 
         <div className="details-spacer"></div>
 
-        <div className="view-count" title="View Count">
+        <div className="view-count" title={viewers && `${viewers} viewers`}>
           {live && (api.viewers && api.viewers.toLocaleString())}
         </div>
       </div>
