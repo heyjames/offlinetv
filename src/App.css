@@ -26,8 +26,8 @@
 
   --size-text-name-online: 0.95em;
   --size-text-game: 0.75em;
-  --size-text-stream-title: 0.9em;
-  --size-text-view-count: 0.95em;
+  --size-text-stream-title: 0.8em;
+  --size-text-view-count: 0.9em;
   --size-text-uptime: 0.75em;
   --size-text-refresh-label: 0.85em;
 }
@@ -408,6 +408,7 @@ body {
 .details-row {
   display: flex;
   flex-direction: row;
+  max-height: 18px;
 }
 
 .name {
